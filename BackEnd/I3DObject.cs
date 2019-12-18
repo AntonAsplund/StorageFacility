@@ -13,6 +13,7 @@ namespace BackEnd
         decimal weight { get; }
         long maxDimension { get; }
         string description { get; }
+        int area { get; }
         bool isFragile { get; }
         decimal insuranceValue { get; }
 

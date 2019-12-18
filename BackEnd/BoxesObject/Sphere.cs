@@ -8,6 +8,7 @@ namespace BackEnd.BoxesObject
 {
     /// <summary>
     /// An object of the type Sphere, which inherts from I3DObject
+    /// The
     /// </summary>
     class Sphere : I3DObject
     {
@@ -16,6 +17,7 @@ namespace BackEnd.BoxesObject
         public decimal weight { get; }
         public long maxDimension { get; }
         public string description { get; }
+        public int area { get; }
         public bool isFragile { get; }
         public decimal insuranceValue { get; }
         public int radius { get; }
@@ -27,6 +29,7 @@ namespace BackEnd.BoxesObject
             this.weight = weight;
             this.maxDimension = (radius * 2);
             this.description = description;
+            this.area = (((radius * 2) * (radius * 2)) * 6);
             this.isFragile = false;
             this.insuranceValue = 0;
             this.radius = radius;

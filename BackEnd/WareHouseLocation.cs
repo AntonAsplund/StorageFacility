@@ -49,6 +49,7 @@ namespace BackEnd
             foreach (var obj in this.storageSpace)
             {
                 Console.WriteLine(obj.id);
+                Console.WriteLine(obj.area);
             }
         }
 

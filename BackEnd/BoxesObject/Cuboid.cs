@@ -16,6 +16,7 @@ namespace BackEnd.BoxesObject
         public decimal weight { get; }
         public long maxDimension { get; }
         public string description { get; }
+        public int area { get; }
         public bool isFragile { get; }
         public decimal insuranceValue { get; }
         public int xSide { get; }
@@ -29,6 +30,7 @@ namespace BackEnd.BoxesObject
             this.weight = weight;
             this.maxDimension = Math.Max(xSide, Math.Max(ySide, zSide));
             this.description = description;
+            this.area = ((xSide*ySide) *4) + ((ySide*zSide)*2);
             this.isFragile = false;
             this.insuranceValue = 0;
             this.xSide = xSide;
