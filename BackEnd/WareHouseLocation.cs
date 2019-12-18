@@ -17,7 +17,7 @@ namespace BackEnd
         private long MaxVolume { get; }
         private bool ContainsFragile { get; set; }
         private long RemainingVolume { get; set; }
-        private decimal ReaminingWeight { get; set; }
+        private decimal RemainingWeight { get; set; }
         internal List<I3DObject> StorageSpace { get; set; }
 
         public WareHouseLocation()
@@ -29,31 +29,35 @@ namespace BackEnd
             this.MaxVolume = Height * Width * Depth;
             this.ContainsFragile = false;
             this.RemainingVolume = MaxVolume;
-            this.ReaminingWeight = MaxWeight;
+            this.RemainingWeight = MaxWeight;
             this.StorageSpace = new List<I3DObject>();
         }
-
+        /// <summary>
+        /// Tries to add a I3DObject to first rack with enough free space
+        /// </summary>
+        /// <param name="box">The object which is tried to be added onto a rack</param>
+        /// <returns>A bool value which for true indicates a sucessfull addition to a rack</returns>
         internal bool TryAdd(I3DObject box)
         {
             bool sucessfullyAdded = false;
-            if (box.IsFragile == true && this.ReaminingWeight == this.MaxWeight 
+            if (box.IsFragile == true && this.RemainingWeight == this.MaxWeight 
                 && 0 <= (this.RemainingVolume - box.Volume) 
-                && 0 <= (this.ReaminingWeight - box.Weight) 
+                && 0 <= (this.RemainingWeight - box.Weight) 
                 &&  this.Height > box.MaxDimension)
             {
                 this.StorageSpace.Add(box);
                 this.RemainingVolume = this.RemainingVolume - box.Volume;
-                this.ReaminingWeight = this.ReaminingWeight - box.Weight;
+                this.RemainingWeight = this.RemainingWeight - box.Weight;
                 sucessfullyAdded = true;
             }
             else if (0 <= (this.RemainingVolume - box.Volume) 
-                && 0 <= (this.ReaminingWeight - box.Weight) 
+                && 0 <= (this.RemainingWeight - box.Weight) 
                 && this.ContainsFragile == false 
                 && this.Height > box.MaxDimension)
             {
                 this.StorageSpace.Add(box);
                 this.RemainingVolume = this.RemainingVolume - box.Volume;
-                this.ReaminingWeight = this.ReaminingWeight - box.Weight;
+                this.RemainingWeight = this.RemainingWeight - box.Weight;
                 sucessfullyAdded = true;
             }
 
@@ -63,7 +67,7 @@ namespace BackEnd
         /// Searches for a specific box ID in each warehouselocation and returns the storageshelf index position
         /// </summary>
         /// <param name="id">ID of the box that is searched</param>
-        /// <returns></returns>
+        /// <returns>The index position in the rack of the sought after box ID</returns>
         internal int FindBoxInWarehouseLocation(int id)
         {
             int indexPositionOfBOx = -1;
@@ -89,6 +93,8 @@ namespace BackEnd
 
             if (index >= 0)
             {
+                this.RemainingWeight = this.RemainingWeight + this.StorageSpace[index].Weight;
+                this.RemainingVolume = this.RemainingVolume + this.StorageSpace[index].Volume;
                 this.StorageSpace.RemoveAt(index);
                 boxRemoved = true;
             }
@@ -113,13 +119,16 @@ namespace BackEnd
                 yield return box;
             }
         }
-
+        /// <summary>
+        /// Method which makes a deep-copy of a WareHouseLocation object and returns it.
+        /// </summary>
+        /// <returns>A WareHouseLocation object</returns>
         internal WareHouseLocation Content()
         {
             WareHouseLocation clonedStorageRack = new WareHouseLocation();
             clonedStorageRack.ContainsFragile = this.ContainsFragile;
             clonedStorageRack.RemainingVolume = this.RemainingVolume;
-            clonedStorageRack.ReaminingWeight = this.ReaminingWeight;
+            clonedStorageRack.RemainingWeight = this.RemainingWeight;
 
             foreach (var boxes in this.StorageSpace)
             {
@@ -128,6 +137,29 @@ namespace BackEnd
             }
 
             return clonedStorageRack;
+        }
+        /// <summary>
+        /// Overrides ToString() method and returns a string representation of all boxes id, description and weight in this storage rack
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            string informationPrintedOnConsoleWindow = "";
+
+            if (this.RemainingWeight == MaxWeight)
+            {
+                informationPrintedOnConsoleWindow += "No boxes on this storage rack \n";
+            }
+
+            foreach (var box in this.StorageSpace)
+            {
+                informationPrintedOnConsoleWindow += "\n Box ID: " + box.Id.ToString();
+                informationPrintedOnConsoleWindow += "\n Box description: " + box.Description.ToString(); 
+                informationPrintedOnConsoleWindow += "\n Box weight: " + box.Weight.ToString() + " kilograms";
+                informationPrintedOnConsoleWindow += "\n ---";
+            }
+
+            return informationPrintedOnConsoleWindow;
         }
 
     }

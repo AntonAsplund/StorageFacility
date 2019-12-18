@@ -38,12 +38,15 @@ namespace BackEnd
                 }
             }
         }
-        
+
         /// <summary>
         /// Accepts a NewBoxInput object and converts it to a object of corresponding type. Calls method TryAddBoxStorage if no specified place is given.
         /// If firstFreeSpace is true, then it's added to first free space. Otherwise it tries on given index.
         /// </summary>
-        /// <param name="userInputNewBox"></param>
+        /// <param name="userInputNewBox">Holds information needed to create a user specified object </param>
+        /// <param name="addToFirstFreeSpace">A bool value which dictates the way the created object is added</param>
+        /// <param name="level">The index position of the level which intended destination rack is located on if such parameter is given<</param>
+        /// <param name="rack">The index position of the intended destination rack if such parameter is given<</param>
         /// <returns></returns>
         public bool ConvertAndAddFromUserInput (NewBoxInput userInputNewBox, bool addToFirstFreeSpace, int level, int rack)
         {
@@ -123,7 +126,13 @@ namespace BackEnd
             }
             return sucessfullyAdded;
         }
-
+        /// <summary>
+        /// Takes an I3DObject and tries to add it to a specific rackposition
+        /// </summary>
+        /// <param name="newBox">The object that contains the new box</param>
+        /// <param name="level">The index position of the level that intended rack is on</param>
+        /// <param name="rack">The index position of the intended rack</param>
+        /// <returns></returns>
         internal bool TryAddBoxToSpecifiedRack(I3DObject newBox, int level, int rack)
         {
             bool sucessfullyAdded = false;
@@ -135,8 +144,8 @@ namespace BackEnd
         /// <summary>
         /// Takes an ID and removes the specified box if found through a method in WareHouseLocation
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>bool if sucessfull</returns>
+        /// <param name="id">ID number of the box that user wants to be removed</param>
+        /// <returns>bool if a sucessfull removal is made</returns>
         public bool RemoveThisBox(int id)
         {
             bool boxRemoved = false;
@@ -155,11 +164,12 @@ namespace BackEnd
             return boxRemoved;
         }
         /// <summary>
-        /// Tries tp move a box to specified place, i
+        /// Tries to move a specified box to a place of the users choice. 
+        /// If unsucessful no move is made, and box is at it's original place.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="level"></param>
-        /// <param name="rack"></param>
+        /// <param name="id">ID number of the box that user wants moved</param>
+        /// <param name="level">The index position of the level that intended destination rack is on</param>
+        /// <param name="rack">The index position of the intended destination rack</param>
         /// <returns></returns>
         public bool MoveBoxToSpecifiedRack(int id, int level, int rack)
         {
@@ -211,6 +221,25 @@ namespace BackEnd
             return boxIndexPosition;
         }
 
+        public void PrintContentsOfEntireStorageShelf()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 1; j < 101; j++)
+                {
+                    Console.WriteLine("Level: {0}  Storage Rack: {1}", i + 1, j);
+                    Console.WriteLine("-----------------------------");
+                    Console.WriteLine(this.StorageShelf[i, j].ToString());
 
+                    if (j % 5 == 0)
+                    {
+                        Console.Write("\n Please enter any key to continue to next five storage racks...");
+                        Console.ReadKey();
+                        Console.Clear();
+                    }
+                }
+            }
+
+        }
     }
 }

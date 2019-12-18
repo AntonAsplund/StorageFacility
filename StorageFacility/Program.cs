@@ -49,6 +49,8 @@ namespace StorageFacility
 
             storageFacility.MoveBoxToSpecifiedRack(1988, 2, 50);
 
+            storageFacility.PrintContentsOfEntireStorageShelf();
+
             Console.ReadKey();
         }
     }
