@@ -37,7 +37,7 @@ namespace BackEnd.BoxesObject
 
         public object Clone()
         {
-            Sphere clonedSphere = new Sphere(this.Id, this.Weight, this.Description, this.radius);
+            Sphere clonedSphere = new Sphere(this.Id, this.Weight, this.Description, this.IsFragile, this.radius);
 
             return clonedSphere;
         }

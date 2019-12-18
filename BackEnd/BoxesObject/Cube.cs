@@ -36,7 +36,7 @@ namespace BackEnd.BoxesObject
 
         public object Clone()
         {
-            Cube clonedCube = new Cube(this.Id, this.Weight, this.Description, this.side);
+            Cube clonedCube = new Cube(this.Id, this.Weight, this.Description, this.IsFragile, this.side);
 
             return clonedCube;
         }

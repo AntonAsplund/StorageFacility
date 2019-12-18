@@ -33,7 +33,7 @@ namespace BackEnd
             this.StorageSpace = new List<I3DObject>();
         }
 
-        public bool TryAdd(I3DObject box)
+        internal bool TryAdd(I3DObject box)
         {
             bool sucessfullyAdded = false;
             if (box.IsFragile == true && this.ReaminingWeight == this.MaxWeight 
@@ -46,7 +46,7 @@ namespace BackEnd
                 this.ReaminingWeight = this.ReaminingWeight - box.Weight;
                 sucessfullyAdded = true;
             }
-            if (0 <= (this.RemainingVolume - box.Volume) 
+            else if (0 <= (this.RemainingVolume - box.Volume) 
                 && 0 <= (this.ReaminingWeight - box.Weight) 
                 && this.ContainsFragile == false 
                 && this.Height > box.MaxDimension)
@@ -60,17 +60,59 @@ namespace BackEnd
 
             return sucessfullyAdded;
         }
+        /// <summary>
+        /// Searches for a specific box ID in each warehouselocation and returns the storageshelf index position
+        /// </summary>
+        /// <param name="id">ID of the box that is searched</param>
+        /// <returns></returns>
+        internal int FindBoxInWarehouseLocation(int id)
+        {
+            int indexPositionOfBOx = -1;
 
-        
+            for (int i = 0; i < this.StorageSpace.Count; i++)
+            {
+                if (this.StorageSpace[i].Id == id)
+                {
+                    indexPositionOfBOx = i;
+                }
+            }
+
+            return indexPositionOfBOx;
+        }
+        /// <summary>
+        /// Removes a box based on a index position in a storagerack
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns>A bool that specifies if function was sucessful</returns>
+        internal bool RemoveBoxByIndex(int index)
+        {
+            bool boxRemoved = false;
+
+            if (index >= 0)
+            {
+                this.StorageSpace.RemoveAt(index);
+                boxRemoved = true;
+            }
+
+            return boxRemoved;
+        }
 
         public IEnumerator<I3DObject> GetEnumerator()
         {
-            throw new NotImplementedException();
+            foreach (var box in StorageSpace)
+            {
+                if (box != null)
+                yield return box;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            foreach (var box in StorageSpace)
+            {
+                if(box!=null)
+                yield return box;
+            }
         }
 
         //internal I3DObject ReCalculate()

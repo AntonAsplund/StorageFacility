@@ -40,7 +40,7 @@ namespace BackEnd.BoxesObject
 
         public object Clone()
         {
-            Cuboid clonedCuboid = new Cuboid(this.Id, this.Weight, this.Description, this.xSide, this.ySide, this.zSide);
+            Cuboid clonedCuboid = new Cuboid(this.Id, this.Weight, this.Description, this.IsFragile, this.xSide, this.ySide, this.zSide);
 
             return clonedCuboid;
         }
