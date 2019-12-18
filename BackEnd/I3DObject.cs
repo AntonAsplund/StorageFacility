@@ -8,14 +8,14 @@ namespace BackEnd
 {
     interface I3DObject : ICloneable
     {
-        int id { get; }
-        long volume { get; }
-        decimal weight { get; }
-        long maxDimension { get; }
-        string description { get; }
-        int area { get; }
-        bool isFragile { get; }
-        decimal insuranceValue { get; }
+        int Id { get; }
+        long Volume { get; }
+        decimal Weight { get; }
+        long MaxDimension { get; }
+        string Description { get; }
+        int Area { get; }
+        bool IsFragile { get; }
+        decimal InsuranceValue { get; }
 
     }
 }

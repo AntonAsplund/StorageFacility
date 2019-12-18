@@ -9,27 +9,67 @@ namespace BackEnd
 {
     public class WareHouse
     {
-        public void testStuff()
+        private WareHouseLocation[,] StorageShelf { get; }
+
+        public WareHouse()
         {
-            WareHouseLocation[,] storageShelf = new WareHouseLocation[3, 101];
+            this.StorageShelf = new WareHouseLocation[3, 101];
+
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 1; j < 101; j++)
                 {
-                    storageShelf[i, j] = new WareHouseLocation();
+                    this.StorageShelf[i, j] = new WareHouseLocation();
                 }
             }
-            Blob testBlob = new Blob(1, 2, "3", 4);
-            Cube testCube = new Cube(5, 6, "7", 8);
 
-            storageShelf[1, 50].TryAdd(testBlob);
-            storageShelf[2, 33].TryAdd(testCube);
-            storageShelf[1, 50].TestMethodPrintAllId();
-            storageShelf[2, 33].TestMethodPrintAllId();
+        }
 
-            //storageSpaceTest.Content();
-            //storageSpaceTest.ReCalculate();
-            //storageSpaceTest.TryAdd();
+        public bool ConvertAndAddFromUserInput (NewBoxInput userInputNewBox)
+        {
+            bool boxSucessfullyAdded = false;
+
+            if (userInputNewBox.Description == "Blob")
+            {
+                Blob newBlob = new Blob(userInputNewBox.Id, userInputNewBox.Weight, userInputNewBox.Description, userInputNewBox.LengthX);
+                boxSucessfullyAdded = TryAddBoxToStorage(newBlob);
+            }
+            else if (userInputNewBox.Description == "Cube")
+            {
+                Cube newCube = new Cube(userInputNewBox.Id, userInputNewBox.Weight, userInputNewBox.Description, userInputNewBox.isFragile, userInputNewBox.LengthX);
+                boxSucessfullyAdded = TryAddBoxToStorage(newCube);
+            }
+            else if (userInputNewBox.Description == "Cuboid")
+            {
+                Cuboid newCuboid = new Cuboid(userInputNewBox.Id, userInputNewBox.Weight, userInputNewBox.Description, userInputNewBox.isFragile, userInputNewBox.LengthX, userInputNewBox.LengthY, userInputNewBox.LengthZ);
+                boxSucessfullyAdded = TryAddBoxToStorage(newCuboid);
+            }
+            else if (userInputNewBox.Description == "Sphere")
+            {
+                Sphere newSphere = new Sphere(userInputNewBox.Id, userInputNewBox.Weight, userInputNewBox.Description, userInputNewBox.isFragile, userInputNewBox.LengthX);
+                boxSucessfullyAdded = TryAddBoxToStorage(newSphere);
+            }
+
+            return 
+        }
+
+        internal bool TryAddBoxToStorage(I3DObject newBox)
+        {
+            bool sucessfullyAdded = false;
+
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 1; j < 101; i++)
+                {
+                    sucessfullyAdded = this.StorageShelf[i, j].TryAdd(newBox);
+                    if (sucessfullyAdded)
+                    {
+                        return sucessfullyAdded;
+                    }
+                }
+            }
+
+            return sucessfullyAdded;
         }
         
         

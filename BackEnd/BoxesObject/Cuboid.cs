@@ -11,28 +11,28 @@ namespace BackEnd.BoxesObject
     /// </summary>
     class Cuboid : I3DObject
     {
-        public int id { get; }
-        public long volume { get; }
-        public decimal weight { get; }
-        public long maxDimension { get; }
-        public string description { get; }
-        public int area { get; }
-        public bool isFragile { get; }
-        public decimal insuranceValue { get; }
+        public int Id { get; }
+        public long Volume { get; }
+        public decimal Weight { get; }
+        public long MaxDimension { get; }
+        public string Description { get; }
+        public int Area { get; }
+        public bool IsFragile { get; }
+        public decimal InsuranceValue { get; set; }
         public int xSide { get; }
         public int ySide { get; }
         public int zSide { get; }
 
-        public Cuboid(int id, decimal weight, string description, int xSide, int ySide, int zSide)
+        public Cuboid(int id, decimal weight, string description, bool isFragile, int xSide, int ySide, int zSide)
         {
-            this.id = id;
-            this.volume = xSide * ySide * zSide;
-            this.weight = weight;
-            this.maxDimension = Math.Max(xSide, Math.Max(ySide, zSide));
-            this.description = description;
-            this.area = ((xSide*ySide) *4) + ((ySide*zSide)*2);
-            this.isFragile = false;
-            this.insuranceValue = 0;
+            this.Id = id;
+            this.Volume = xSide * ySide * zSide;
+            this.Weight = weight;
+            this.MaxDimension = Math.Max(xSide, Math.Max(ySide, zSide));
+            this.Description = description;
+            this.Area = ((xSide*ySide) *4) + ((ySide*zSide)*2);
+            this.IsFragile = isFragile;
+            this.InsuranceValue = 0;
             this.xSide = xSide;
             this.ySide = ySide;
             this.zSide = zSide;
@@ -40,7 +40,7 @@ namespace BackEnd.BoxesObject
 
         public object Clone()
         {
-            Cuboid clonedCuboid = new Cuboid(this.id, this.weight, this.description, this.xSide, this.ySide, this.zSide);
+            Cuboid clonedCuboid = new Cuboid(this.Id, this.Weight, this.Description, this.xSide, this.ySide, this.zSide);
 
             return clonedCuboid;
         }

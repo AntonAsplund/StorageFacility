@@ -12,7 +12,9 @@ namespace StorageFacility
         static void Main(string[] args)
         {
             WareHouse storageFacility = new WareHouse();
-            storageFacility.testStuff();
+
+            
+            new ware
 
             Console.ReadKey();
         }

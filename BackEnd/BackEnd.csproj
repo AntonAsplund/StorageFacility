@@ -46,6 +46,7 @@
     <Compile Include="BoxesObject\Cuboid.cs" />
     <Compile Include="BoxesObject\Sphere.cs" />
     <Compile Include="I3DObject.cs" />
+    <Compile Include="NewBoxInput.cs" />
     <Compile Include="WareHouseLocation.cs" />
     <Compile Include="WareHouse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
