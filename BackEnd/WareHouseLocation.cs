@@ -57,7 +57,6 @@ namespace BackEnd
                 sucessfullyAdded = true;
             }
 
-
             return sucessfullyAdded;
         }
         /// <summary>
@@ -115,10 +114,21 @@ namespace BackEnd
             }
         }
 
-        //internal I3DObject ReCalculate()
+        internal WareHouseLocation Content()
+        {
+            WareHouseLocation clonedStorageRack = new WareHouseLocation();
+            clonedStorageRack.ContainsFragile = this.ContainsFragile;
+            clonedStorageRack.RemainingVolume = this.RemainingVolume;
+            clonedStorageRack.ReaminingWeight = this.ReaminingWeight;
 
+            foreach (var boxes in this.StorageSpace)
+            {
+                I3DObject clonedBox = boxes.Clone() as I3DObject;
+                clonedStorageRack.StorageSpace.Add(clonedBox);
+            }
 
-        //internal WareHouseLocation Content()
+            return clonedStorageRack;
+        }
 
     }
 }
