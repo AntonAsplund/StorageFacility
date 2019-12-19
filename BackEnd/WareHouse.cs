@@ -15,12 +15,13 @@ namespace BackEnd
     public class WareHouse 
     {
         private WareHouseLocation[,] StorageShelf { get; }
-
+        private int Id { get; set; }
         public WareHouse()
         {
             try
             {
                 this.StorageShelf = DeserializeObject();
+                this.Id = GetHighestCurrentId();
             }
             catch
             {
@@ -31,8 +32,11 @@ namespace BackEnd
                     for (int j = 1; j < 101; j++)
                     {
                         this.StorageShelf[i, j] = new WareHouseLocation();
+                        
                     }
                 }
+
+                this.Id = GetHighestCurrentId();
             }
         }
 
@@ -42,6 +46,24 @@ namespace BackEnd
             {
                 return StorageShelf[level, rack].ToString();
             }
+        }
+
+        internal int GetHighestCurrentId()
+        {
+            int HighestCurrentId = 0;
+
+            for (int level = 0; level < 3; level++)
+            {
+                for (int rack = 0; rack < 101; rack++)
+                {
+                    foreach (var box in this.StorageShelf[level, rack])
+                    {
+                        HighestCurrentId = Math.Max(HighestCurrentId, box.Id);
+                    }
+                }
+            }
+
+            return HighestCurrentId;
         }
 
         public void TestStuff(int level, int rack)
@@ -69,7 +91,7 @@ namespace BackEnd
 
             if (userInputNewBox.Description == "Blob")
             {
-                Blob newBlob = new Blob(userInputNewBox.Id, userInputNewBox.Weight, userInputNewBox.Description, userInputNewBox.LengthX);
+                Blob newBlob = new Blob(this.Id, userInputNewBox.Weight, userInputNewBox.Description, userInputNewBox.LengthX);
                 if (addToFirstFreeSpace)
                 {
                     boxSucessFullyAdded = TryAddBoxToStorage(newBlob);
@@ -81,7 +103,7 @@ namespace BackEnd
             }
             else if (userInputNewBox.Description == "Cube")
             {
-                Cube newCube = new Cube(userInputNewBox.Id, userInputNewBox.Weight, userInputNewBox.Description, userInputNewBox.isFragile, userInputNewBox.LengthX);
+                Cube newCube = new Cube(this.Id, userInputNewBox.Weight, userInputNewBox.Description, userInputNewBox.isFragile, userInputNewBox.LengthX);
                 if (addToFirstFreeSpace)
                 {
                     boxSucessFullyAdded = TryAddBoxToStorage(newCube);
@@ -93,7 +115,7 @@ namespace BackEnd
             }
             else if (userInputNewBox.Description == "Cuboid")
             {
-                Cuboid newCuboid = new Cuboid(userInputNewBox.Id, userInputNewBox.Weight, userInputNewBox.Description, userInputNewBox.isFragile, userInputNewBox.LengthX, userInputNewBox.LengthY, userInputNewBox.LengthZ);
+                Cuboid newCuboid = new Cuboid(this.Id, userInputNewBox.Weight, userInputNewBox.Description, userInputNewBox.isFragile, userInputNewBox.LengthX, userInputNewBox.LengthY, userInputNewBox.LengthZ);
                 if (addToFirstFreeSpace)
                 {
                     boxSucessFullyAdded = TryAddBoxToStorage(newCuboid);
@@ -105,7 +127,7 @@ namespace BackEnd
             }
             else if (userInputNewBox.Description == "Sphere")
             {
-                Sphere newSphere = new Sphere(userInputNewBox.Id, userInputNewBox.Weight, userInputNewBox.Description, userInputNewBox.isFragile, userInputNewBox.LengthX);
+                Sphere newSphere = new Sphere(this.Id, userInputNewBox.Weight, userInputNewBox.Description, userInputNewBox.isFragile, userInputNewBox.LengthX);
                 if (addToFirstFreeSpace)
                 {
                     boxSucessFullyAdded = TryAddBoxToStorage(newSphere);
@@ -116,6 +138,8 @@ namespace BackEnd
                 }
 
             }
+
+            this.Id++; // Adds one to Id each time a box has been added or have been tried to be added to the storagerack facility
 
             return boxSucessFullyAdded;
         }
@@ -273,6 +297,20 @@ namespace BackEnd
             WareHouseLocation[,] wareHouseFromSaveFile = (WareHouseLocation[,])formatter.Deserialize(stream);
 
             return wareHouseFromSaveFile;
+        }
+
+        public void AddTestBoxes()
+        {
+            NewBoxInput testBox = new NewBoxInput(1, 2, "Blob", 4);     // lägger till en låda i systemet, kollar om det finnns plats i hyllorna för en av den sagda typen
+            ConvertAndAddFromUserInput(testBox, true, 0, 0);    // vilken typ det är bestäms av fleravals val av användaren som är hårdkodade.
+            NewBoxInput testBox2 = new NewBoxInput(2, 1001, "Cube", 10);
+            ConvertAndAddFromUserInput(testBox2, true, 0, 0);
+            NewBoxInput testBox3 = new NewBoxInput(1988, 9, "Cube", 10);
+            ConvertAndAddFromUserInput(testBox3, true, 0, 0);
+            NewBoxInput testBox4 = new NewBoxInput(1982, 9, "Cube", 10);
+            ConvertAndAddFromUserInput(testBox4, false, 2, 50);
+            NewBoxInput testBox5 = new NewBoxInput(1982, 9, "Cube", 10);
+            ConvertAndAddFromUserInput(testBox5, false, 2, 99);
         }
     }
 }

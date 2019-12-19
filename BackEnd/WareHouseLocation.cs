@@ -14,7 +14,7 @@ namespace BackEnd
     [Serializable]
     internal class WareHouseLocation : IEnumerable<I3DObject>
     {
-        private long Height { get;}
+        private long Height { get; }
         private long Width { get; }
         private long Depth { get; }
         private decimal MaxWeight { get; }
@@ -23,6 +23,8 @@ namespace BackEnd
         private long RemainingVolume { get; set; }
         private decimal RemainingWeight { get; set; }
         internal List<I3DObject> StorageSpace { get; set; }
+
+
 
         public WareHouseLocation()
         {
@@ -36,6 +38,7 @@ namespace BackEnd
             this.RemainingWeight = MaxWeight;
             this.StorageSpace = new List<I3DObject>();
         }
+
         /// <summary>
         /// Tries to add a I3DObject to first rack with enough free space
         /// </summary>
