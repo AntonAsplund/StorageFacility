@@ -55,5 +55,17 @@ namespace StorageFacility
             }
         }
 
+        public void PrintAddBoxToSpecifiedLevel()
+        {
+            Console.Clear();
+            Console.WriteLine("On what level is the rack?");
+            Console.Write("Level : "); 
+        }
+        public void PrintAddBoxToSpecifiedRack()
+        {
+            Console.WriteLine("\nWhat number does the rack have?");
+            Console.Write("Rack: ");
+        }
+
     }
 }

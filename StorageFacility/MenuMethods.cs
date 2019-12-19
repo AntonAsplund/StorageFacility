@@ -24,7 +24,7 @@ namespace StorageFacility
                 {
                     Console.WriteLine("Please do only write numbers");
                 }
-                if (userChoice < 1 || userChoice > 6)
+                else if (userChoice < 1 || userChoice > 6)
                 {
                     Console.WriteLine("Please enter a valid menu choice");
                     sucessfullConversion = false;
@@ -46,7 +46,7 @@ namespace StorageFacility
                 {
                     Console.WriteLine("Please enter a valid number, try again...");
                 }
-                if (userChoice < 1 || userChoice > 4)
+                else if (userChoice < 1 || userChoice > 4)
                 {
                     Console.WriteLine("Please enter a valid menu choice");
                     sucessfullConversion = false;
@@ -123,7 +123,7 @@ namespace StorageFacility
                 {
                     Console.Write("Enter a valid number, try again: ");
                 }
-                if (measurement < 1 || measurement > 220)
+                else if (measurement < 1 || measurement > 220)
                 {
                     Console.Write("Please enter a value in between 1 and 220 centimeters");
                     sucessfullConversion = false;
@@ -170,7 +170,7 @@ namespace StorageFacility
                 {
                     Console.Write("Please enter a valid number, try again...");
                 }
-                if (weightOfBox < 0 || weightOfBox > 1000)
+                else if (weightOfBox < 0 || weightOfBox > 1000)
                 {
                     Console.Write("Please enter a valid weight in kilograms");
                     sucessfullConversion = false;
