@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BackEnd.BoxesObject
 {
+    [Serializable]
     /// <summary>
     /// An object of the type Cuboid, which inherts from I3DObject
     /// </summary>

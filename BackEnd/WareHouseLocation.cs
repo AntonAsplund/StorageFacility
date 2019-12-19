@@ -5,10 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BackEnd.BoxesObject;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace BackEnd
 {
-    
+    [Serializable]
     internal class WareHouseLocation : IEnumerable<I3DObject>
     {
         private long Height { get;}

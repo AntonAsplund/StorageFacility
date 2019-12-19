@@ -4,22 +4,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BackEnd.BoxesObject;
+using System.Xml;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace BackEnd
-{
-    public class WareHouse
+{   
+    [Serializable]
+    public class WareHouse 
     {
         private WareHouseLocation[,] StorageShelf { get; }
 
         public WareHouse()
         {
-            this.StorageShelf = new WareHouseLocation[3, 101];
-
-            for (int i = 0; i < 3; i++)
+            try
             {
-                for (int j = 1; j < 101; j++)
+                this.StorageShelf = DeserializeObject();
+            }
+            catch
+            {
+                this.StorageShelf = new WareHouseLocation[3, 101];
+
+                for (int i = 0; i < 3; i++)
                 {
-                    this.StorageShelf[i, j] = new WareHouseLocation();
+                    for (int j = 1; j < 101; j++)
+                    {
+                        this.StorageShelf[i, j] = new WareHouseLocation();
+                    }
                 }
             }
         }
@@ -242,6 +254,25 @@ namespace BackEnd
                     }
                 }
             }
+        }
+
+        public void SerializeObject()
+        {
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream("wareHouseSaveFile.txt", FileMode.Create, FileAccess.Write);
+
+            formatter.Serialize(stream, this.StorageShelf);
+            stream.Close();
+        }
+
+        internal WareHouseLocation[,] DeserializeObject()
+        {
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream("wareHouseSaveFile.txt", FileMode.Open, FileAccess.Read);
+
+            WareHouseLocation[,] wareHouseFromSaveFile = (WareHouseLocation[,])formatter.Deserialize(stream);
+
+            return wareHouseFromSaveFile;
         }
     }
 }

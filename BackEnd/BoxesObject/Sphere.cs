@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace BackEnd.BoxesObject
 {
+    [Serializable]
     /// <summary>
     /// An object of the type Sphere, which inherts from I3DObject
     /// The
     /// </summary>
+    /// 
     class Sphere : I3DObject
     {
         public int Id { get; }
