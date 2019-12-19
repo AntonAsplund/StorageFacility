@@ -8,28 +8,31 @@ namespace BackEnd
 {
     public class NewBoxInput
     {
-        public int Id { get; }
         public decimal Weight { get; }
         public string Description { get; }
-        public bool isFragile { get; }
+        public bool IsFragile { get; }
         public int LengthX { get; }
         public int LengthY { get; }
         public int LengthZ { get; }
 
-        public NewBoxInput(int id, decimal weight, string description, int lengthX, int lengthY, int lengthZ)
+        public NewBoxInput()
+        { 
+        
+        }
+        public NewBoxInput(decimal weight, string description,bool isFragile, int lengthX, int lengthY, int lengthZ)
         {
-            this.Id = id;
             this.Weight = weight;
             this.Description = description;
+            this.IsFragile = isFragile;
             this.LengthX = lengthX;
             this.LengthY = lengthY;
             this.LengthZ = lengthZ;
         }
-        public NewBoxInput(int id, decimal weight, string description, int lengthX)
+        public NewBoxInput(decimal weight, string description,bool isFragile, int lengthX)
         {
-            this.Id = id;
             this.Weight = weight;
             this.Description = description;
+            this.IsFragile = isFragile;
             this.LengthX = lengthX;
         }
 

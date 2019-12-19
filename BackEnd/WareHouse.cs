@@ -40,11 +40,11 @@ namespace BackEnd
             }
         }
 
-        public string this[int level, int rack]
+        public WareHouseLocation this[int level, int rack]
         {
             get
             {
-                return StorageShelf[level, rack].ToString();
+                return StorageShelf[level, rack].Content();
             }
         }
 
@@ -54,9 +54,9 @@ namespace BackEnd
 
             for (int level = 0; level < 3; level++)
             {
-                for (int rack = 0; rack < 101; rack++)
+                for (int rack = 1; rack < 101; rack++)
                 {
-                    foreach (var box in this.StorageShelf[level, rack])
+                    foreach (I3DObject box in this.StorageShelf[level,rack])
                     {
                         HighestCurrentId = Math.Max(HighestCurrentId, box.Id);
                     }
@@ -64,16 +64,6 @@ namespace BackEnd
             }
 
             return HighestCurrentId;
-        }
-
-        public void TestStuff(int level, int rack)
-        {
-            foreach (var shelf in this.StorageShelf[level,rack])
-            {
-               Console.WriteLine(shelf.ToString());
-               Console.WriteLine("TestStuff");
-               
-            }
         }
 
         /// <summary>
@@ -85,7 +75,7 @@ namespace BackEnd
         /// <param name="level">The index position of the level which intended destination rack is located on if such parameter is given<</param>
         /// <param name="rack">The index position of the intended destination rack if such parameter is given<</param>
         /// <returns></returns>
-        public bool ConvertAndAddFromUserInput (NewBoxInput userInputNewBox, bool addToFirstFreeSpace, int level, int rack)
+        public bool ConvertAndAddFromUserInput (NewBoxInput userInputNewBox, bool addToFirstFreeSpace, int level = 0, int rack = 0)
         {
             bool boxSucessFullyAdded = false;
 
@@ -103,7 +93,7 @@ namespace BackEnd
             }
             else if (userInputNewBox.Description == "Cube")
             {
-                Cube newCube = new Cube(this.Id, userInputNewBox.Weight, userInputNewBox.Description, userInputNewBox.isFragile, userInputNewBox.LengthX);
+                Cube newCube = new Cube(this.Id, userInputNewBox.Weight, userInputNewBox.Description, userInputNewBox.IsFragile, userInputNewBox.LengthX);
                 if (addToFirstFreeSpace)
                 {
                     boxSucessFullyAdded = TryAddBoxToStorage(newCube);
@@ -115,7 +105,7 @@ namespace BackEnd
             }
             else if (userInputNewBox.Description == "Cuboid")
             {
-                Cuboid newCuboid = new Cuboid(this.Id, userInputNewBox.Weight, userInputNewBox.Description, userInputNewBox.isFragile, userInputNewBox.LengthX, userInputNewBox.LengthY, userInputNewBox.LengthZ);
+                Cuboid newCuboid = new Cuboid(this.Id, userInputNewBox.Weight, userInputNewBox.Description, userInputNewBox.IsFragile, userInputNewBox.LengthX, userInputNewBox.LengthY, userInputNewBox.LengthZ);
                 if (addToFirstFreeSpace)
                 {
                     boxSucessFullyAdded = TryAddBoxToStorage(newCuboid);
@@ -127,7 +117,7 @@ namespace BackEnd
             }
             else if (userInputNewBox.Description == "Sphere")
             {
-                Sphere newSphere = new Sphere(this.Id, userInputNewBox.Weight, userInputNewBox.Description, userInputNewBox.isFragile, userInputNewBox.LengthX);
+                Sphere newSphere = new Sphere(this.Id, userInputNewBox.Weight, userInputNewBox.Description, userInputNewBox.IsFragile, userInputNewBox.LengthX);
                 if (addToFirstFreeSpace)
                 {
                     boxSucessFullyAdded = TryAddBoxToStorage(newSphere);
@@ -257,27 +247,6 @@ namespace BackEnd
                 }
             }
             return boxIndexPosition;
-        }
-
-        public void PrintContentsOfEntireStorageShelf()
-        {
-
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 1; j < 101; j++)
-                {
-                    Console.WriteLine("\n Level: {0}  Storage Rack: {1}", i + 1, j);
-                    Console.WriteLine("\n -----------------------------");
-                    Console.WriteLine(this.StorageShelf[i, j].ToString());
-
-                    if (j % 5 == 0)
-                    {
-                        Console.Write("\n Please enter any key to continue to next five storage racks...");
-                        Console.ReadKey();
-                        Console.Clear();
-                    }
-                }
-            }
         }
 
         public void SerializeObject()

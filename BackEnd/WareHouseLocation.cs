@@ -12,7 +12,7 @@ using System.IO;
 namespace BackEnd
 {
     [Serializable]
-    internal class WareHouseLocation : IEnumerable<I3DObject>
+    public class WareHouseLocation : IEnumerable<I3DObject>
     {
         private long Height { get; }
         private long Width { get; }
@@ -26,7 +26,7 @@ namespace BackEnd
 
 
 
-        public WareHouseLocation()
+        internal WareHouseLocation()
         {
             this.Height = 220;
             this.Width = 200;
@@ -149,21 +149,14 @@ namespace BackEnd
             return informationPrintedOnConsoleWindow;
         }
 
-        public IEnumerator<I3DObject> GetEnumerator()
+        IEnumerator<I3DObject> IEnumerable<I3DObject>.GetEnumerator()
         {
-            foreach (var box in StorageSpace)
-            {
-                if (box == null)
-                {
-                    break;
-                }
-                yield return box;
-            }
+            return this.StorageSpace.GetEnumerator();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public IEnumerator GetEnumerator()
         {
-            return ((IEnumerable<I3DObject>)StorageSpace).GetEnumerator();
+            return this.StorageSpace.GetEnumerator();
         }
     }
 }
