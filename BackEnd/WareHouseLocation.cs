@@ -8,6 +8,7 @@ using BackEnd.BoxesObject;
 
 namespace BackEnd
 {
+    
     internal class WareHouseLocation : IEnumerable<I3DObject>
     {
         private long Height { get;}
@@ -98,27 +99,9 @@ namespace BackEnd
                 this.StorageSpace.RemoveAt(index);
                 boxRemoved = true;
             }
-
             return boxRemoved;
         }
 
-        public IEnumerator<I3DObject> GetEnumerator()
-        {
-            foreach (var box in StorageSpace)
-            {
-                if (box != null)
-                yield return box;
-            }
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            foreach (var box in StorageSpace)
-            {
-                if(box!=null)
-                yield return box;
-            }
-        }
         /// <summary>
         /// Method which makes a deep-copy of a WareHouseLocation object and returns it.
         /// </summary>
@@ -153,14 +136,28 @@ namespace BackEnd
 
             foreach (var box in this.StorageSpace)
             {
-                informationPrintedOnConsoleWindow += "\n Box ID: " + box.Id.ToString();
-                informationPrintedOnConsoleWindow += "\n Box description: " + box.Description.ToString(); 
-                informationPrintedOnConsoleWindow += "\n Box weight: " + box.Weight.ToString() + " kilograms";
+                informationPrintedOnConsoleWindow += "\n " + box.ToString();
                 informationPrintedOnConsoleWindow += "\n ---";
             }
 
             return informationPrintedOnConsoleWindow;
         }
 
+        public IEnumerator<I3DObject> GetEnumerator()
+        {
+            foreach (var box in StorageSpace)
+            {
+                if (box == null)
+                {
+                    break;
+                }
+                yield return box;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable<I3DObject>)StorageSpace).GetEnumerator();
+        }
     }
 }

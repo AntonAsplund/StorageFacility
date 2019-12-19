@@ -44,5 +44,15 @@ namespace BackEnd.BoxesObject
 
             return clonedCuboid;
         }
+        public override string ToString()
+        {
+            string stringRepresentation = "";
+
+            stringRepresentation = "ID: " + this.Id.ToString();
+            stringRepresentation += "\n Description: " + this.Description;
+            stringRepresentation += "\n Weight: " + this.Weight.ToString();
+
+            return stringRepresentation;
+        }
     }
 }

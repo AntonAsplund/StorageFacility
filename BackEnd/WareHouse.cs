@@ -22,20 +22,23 @@ namespace BackEnd
                     this.StorageShelf[i, j] = new WareHouseLocation();
                 }
             }
-
         }
 
-        public void TestStuff()
+        public string this[int level, int rack]
         {
-            foreach (var box in this.StorageShelf)
+            get
             {
-                if (box != null)
-                {
-                    foreach (var individualBoxes in box)
-                    {
-                        Console.WriteLine(individualBoxes.Description);
-                    }
-                }
+                return StorageShelf[level, rack].ToString();
+            }
+        }
+
+        public void TestStuff(int level, int rack)
+        {
+            foreach (var shelf in this.StorageShelf[level,rack])
+            {
+               Console.WriteLine(shelf.ToString());
+               Console.WriteLine("TestStuff");
+               
             }
         }
 
@@ -217,18 +220,18 @@ namespace BackEnd
                     }
                 }
             }
-
             return boxIndexPosition;
         }
 
         public void PrintContentsOfEntireStorageShelf()
         {
+
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 1; j < 101; j++)
                 {
-                    Console.WriteLine("Level: {0}  Storage Rack: {1}", i + 1, j);
-                    Console.WriteLine("-----------------------------");
+                    Console.WriteLine("\n Level: {0}  Storage Rack: {1}", i + 1, j);
+                    Console.WriteLine("\n -----------------------------");
                     Console.WriteLine(this.StorageShelf[i, j].ToString());
 
                     if (j % 5 == 0)
@@ -239,7 +242,6 @@ namespace BackEnd
                     }
                 }
             }
-
         }
     }
 }
