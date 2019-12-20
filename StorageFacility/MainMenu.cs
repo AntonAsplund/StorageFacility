@@ -47,20 +47,58 @@ namespace StorageFacility
                                 bool sucessfullAddition = storageFacility.ConvertAndAddFromUserInput(newBox, addToFirstFreeSpace, userSpecifiedPlace[0], userSpecifiedPlace[1]);
                                 printTexts.PrintResultOfBoxAdditionToStorage(sucessfullAddition);
                             }
+                            storageFacility.SerializeObject();
                             break;
                         }
                     case 2:
-                        {
-                            //Search for a box through ID number
+                        {   //Search for a box through ID number
+                            int searchThisId = menuMethods.GetSearchIdForBox();
+                            int[] positionOfBox = storageFacility.FindBox(searchThisId);
+                            if (positionOfBox[0] < 0)
+                            {
+                                printTexts.PrintNoBoxIsFound(searchThisId);
+                                menuMethods.ContinueToMainMenu();
+                            }
+                            else
+                            {
+                                printTexts.PrintPositionOfBox(positionOfBox);
+                                menuMethods.ContinueToMainMenu();
+                            }
+                            storageFacility.SerializeObject();
                             break;
                         }
                     case 3:
-                        {
-                            //Remove a box from storage facility
+                        {   //Remove a box from storage facility
+                            int searchAndRemoveThisId = menuMethods.GetRemoveIdOfBox();
+                            bool sucessfulltRemoved = storageFacility.RemoveThisBox(searchAndRemoveThisId);
+                            if (sucessfulltRemoved == false)
+                            {
+                                printTexts.PrintNoBoxIsFound(searchAndRemoveThisId);
+                                menuMethods.ContinueToMainMenu();
+                            }
+                            else
+                            {
+                                printTexts.PrintSucessfullRemovalOfBox(searchAndRemoveThisId);
+                                menuMethods.ContinueToMainMenu();
+                            }
+                            storageFacility.SerializeObject();
                             break;
                         }
                     case 4:
                         {   //Move a box to a new location in storage facility
+                            int[] idOfBoxAndNewPosition = menuMethods.GetSearchIDAndPlaceForBoxToMove();
+                            bool sucessfullMoveOfBox = storageFacility.MoveBoxToSpecifiedRack(idOfBoxAndNewPosition[0], idOfBoxAndNewPosition[1], idOfBoxAndNewPosition[2]);
+                            if (sucessfullMoveOfBox == false)
+                            {
+                                printTexts.PrintNoBoxHasBeenMoved();
+                                menuMethods.ContinueToMainMenu();
+                            }
+                            else
+                            {
+                                printTexts.PrintBoxHasBeenMoved(idOfBoxAndNewPosition);
+                                menuMethods.ContinueToMainMenu();
+                            }
+                            storageFacility.SerializeObject();
                             break;
                         }
                     case 5:
@@ -69,6 +107,7 @@ namespace StorageFacility
                         }
                     case 6:
                         {   //Exit the program
+                            printTexts.PrintExitProgramMessage();
                             stayInMenu = false;
                             break;
                         }

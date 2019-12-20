@@ -12,7 +12,7 @@ namespace StorageFacility
         PrintTexts printText = new PrintTexts();
         UserInputs userInputs = new UserInputs();
 
-        public int GetUserInputsForMainMenu()
+        internal int GetUserInputsForMainMenu()
         {
             int userChoice = 0;
             bool sucessfullConversion = false;
@@ -33,7 +33,7 @@ namespace StorageFacility
 
             return userChoice;
         }
-        public NewBoxInput CreateNewBox()
+        internal NewBoxInput CreateNewBox()
         {
             NewBoxInput newBox = new NewBoxInput();
             printText.PrintCreateNewBoxInputCHoice();
@@ -179,22 +179,51 @@ namespace StorageFacility
 
             return weightOfBox;
         }
-
-        public void SearchForBox()
+        /// <summary>
+        /// Handles method calls for a user to input id number to search for. Return int searchThisId
+        /// </summary>
+        internal int GetSearchIdForBox()
         {
+            Console.Clear();
+            printText.PrintSearchForBoxById();
+            int searchThisId = userInputs.UserInputAnyNumber();
 
+            return searchThisId;
         }
-        public void RemoveBox()
-        {
 
+        /// <summary>
+        /// Gets a ID number of the box the user wants to remove. Returns int searchThisIdToRemove
+        /// </summary>
+        /// <returns></returns>
+        internal int GetRemoveIdOfBox()
+        {
+            Console.Clear();
+            printText.PrintWhichIdToRemove();
+            int searchThisIdToRemove = userInputs.UserInputAnyNumber();
+
+            return searchThisIdToRemove;
         }
         public void MoveBox()
         {
 
         }
 
+        /// <summary>
+        /// Get the ID number the user wants to move. Returns int array with [0] = id of box to move, [1] = level, [2] = rack
+        /// </summary>
+        /// <returns></returns>
+        internal int[] GetSearchIDAndPlaceForBoxToMove()
+        {
+            Console.Clear();
+            printText.PrintSearchForBoxByIdAndMove();
+            int moveThisId = userInputs.UserInputAnyNumber();
+            printText.PrintWhichLevelToMoveTo();
+            int[] levelAndRackPosition = userInputs.UserLevelAndRackInput();
 
+            int[] positionAndIdOfOldBox = new int[3] { moveThisId, levelAndRackPosition[0], levelAndRackPosition[1] };
 
+            return positionAndIdOfOldBox;
+        }
 
         public void PrintContentsOfEntireStorageShelf(WareHouse storageFacility)
         {
@@ -208,6 +237,13 @@ namespace StorageFacility
                 }
             }
          
+        }
+
+        public void ContinueToMainMenu()
+        {
+            Console.WriteLine("\nPress any key to continue to main menu...");
+            Console.ReadKey();
+            Console.Clear();
         }
     }
 }

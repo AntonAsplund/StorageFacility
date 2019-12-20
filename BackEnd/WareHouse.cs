@@ -50,7 +50,7 @@ namespace BackEnd
 
         internal int GetHighestCurrentId()
         {
-            int HighestCurrentId = 0;
+            int highestCurrentId = 0;
 
             for (int level = 0; level < 3; level++)
             {
@@ -58,12 +58,12 @@ namespace BackEnd
                 {
                     foreach (I3DObject box in this.StorageShelf[level,rack])
                     {
-                        HighestCurrentId = Math.Max(HighestCurrentId, box.Id);
+                        highestCurrentId = Math.Max(highestCurrentId, box.Id);
                     }
                 }
             }
 
-            return HighestCurrentId;
+            return highestCurrentId;
         }
 
         /// <summary>
@@ -194,7 +194,7 @@ namespace BackEnd
         }
         /// <summary>
         /// Tries to move a specified box to a place of the users choice. 
-        /// If unsucessful no move is made, and box is at it's original place.
+        /// If unsucessful no move is made, and box is at it's original place. Returns a bool, true = sucessfull move, false = no move of box.
         /// </summary>
         /// <param name="id">ID number of the box that user wants moved</param>
         /// <param name="level">The index position of the level that intended destination rack is on</param>
@@ -223,9 +223,10 @@ namespace BackEnd
         }
 
         /// <summary>
-        /// Searches for a unique ID number and returns the index position. If positons equals negative, then no box is found.
+        /// Searches for a unique ID number and returns the index position as an int array. If any positon equals negative, then no box is found.
+        /// Else [0] = level, [1] = rack, [2] = rack slot
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">int number of box id user want to find</param>
         /// <returns></returns>
         public int[] FindBox(int id)
         {
@@ -248,37 +249,42 @@ namespace BackEnd
             }
             return boxIndexPosition;
         }
-
+        /// <summary>
+        /// Saves the contents of the collection "WhareHouseLocation[,]" that holds the information about the storagefacility
+        /// </summary>
         public void SerializeObject()
         {
             IFormatter formatter = new BinaryFormatter();
+            File.Delete("wareHouseSaveFile.txt");
             Stream stream = new FileStream("wareHouseSaveFile.txt", FileMode.Create, FileAccess.Write);
 
             formatter.Serialize(stream, this.StorageShelf);
             stream.Close();
         }
-
+        /// <summary>
+        /// Loads the contents of the collection "WhareHouseLocation[,]" that holds the information about the storagefacility
+        /// </summary>
         internal WareHouseLocation[,] DeserializeObject()
         {
             IFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream("wareHouseSaveFile.txt", FileMode.Open, FileAccess.Read);
 
             WareHouseLocation[,] wareHouseFromSaveFile = (WareHouseLocation[,])formatter.Deserialize(stream);
-
+            stream.Close();
             return wareHouseFromSaveFile;
         }
 
         public void AddTestBoxes()
         {
-            NewBoxInput testBox = new NewBoxInput(1, 2, "Blob", 4);     // lägger till en låda i systemet, kollar om det finnns plats i hyllorna för en av den sagda typen
+            NewBoxInput testBox = new NewBoxInput(1, "Blob", true, 10);    // lägger till en låda i systemet, kollar om det finnns plats i hyllorna för en av den sagda typen
             ConvertAndAddFromUserInput(testBox, true, 0, 0);    // vilken typ det är bestäms av fleravals val av användaren som är hårdkodade.
-            NewBoxInput testBox2 = new NewBoxInput(2, 1001, "Cube", 10);
+            NewBoxInput testBox2 = new NewBoxInput(1001, "Cube",true, 10);
             ConvertAndAddFromUserInput(testBox2, true, 0, 0);
-            NewBoxInput testBox3 = new NewBoxInput(1988, 9, "Cube", 10);
+            NewBoxInput testBox3 = new NewBoxInput(9, "Cube", true, 10);
             ConvertAndAddFromUserInput(testBox3, true, 0, 0);
-            NewBoxInput testBox4 = new NewBoxInput(1982, 9, "Cube", 10);
+            NewBoxInput testBox4 = new NewBoxInput(9, "Cube", true, 10);
             ConvertAndAddFromUserInput(testBox4, false, 2, 50);
-            NewBoxInput testBox5 = new NewBoxInput(1982, 9, "Cube", 10);
+            NewBoxInput testBox5 = new NewBoxInput(9, "Cube", true, 10);
             ConvertAndAddFromUserInput(testBox5, false, 2, 99);
         }
     }

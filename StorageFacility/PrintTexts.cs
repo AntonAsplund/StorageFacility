@@ -36,7 +36,7 @@ namespace StorageFacility
 
         public void PrintAddBoxToSpecifiedRackOrNotMenu()
         {
-            Console.WriteLine("Do you want to add the box to a specified rack or first free?");
+            Console.WriteLine("Do you want to add the box to first free or a specified rack?");
             Console.WriteLine("1. Yes");
             Console.WriteLine("2. No\n");
 
@@ -53,6 +53,7 @@ namespace StorageFacility
             {
                 Console.WriteLine("No box has NOT been added due to an unforseen event");
             }
+            
         }
 
         public void PrintAddBoxToSpecifiedLevel()
@@ -66,6 +67,72 @@ namespace StorageFacility
             Console.WriteLine("\nWhat number does the rack have?");
             Console.Write("Rack: ");
         }
+
+        public void PrintSearchForBoxById()
+        {
+            Console.WriteLine("What is the id of the box you want to find?");
+            Console.Write("Enter ID number: ");
+        }
+        public void PrintNoBoxIsFound(int searchThisId)
+        {
+            Console.Clear();
+            Console.WriteLine("No box has been found in the system.");
+            Console.WriteLine("Have you entered correct id number?");
+            Console.WriteLine(" Written ID number: {0}", searchThisId);
+        }
+
+        public void PrintPositionOfBox(int[] positionOfBox)
+        {
+            Console.WriteLine("The position of the box is:");
+            Console.WriteLine("Level: {0}", positionOfBox[0]+1);
+            Console.WriteLine("Rack: {0}", positionOfBox[1]);
+            Console.WriteLine("Rack slot: {0}", positionOfBox[2]);
+        }
+
+        public void PrintWhichIdToRemove()
+        {
+            Console.WriteLine("What is the I number of the box you want to remove?");
+            Console.Write("Enter number: ");
+        }
+
+        public void PrintSucessfullRemovalOfBox(int searchAndRemoveThisId)
+        {
+            Console.WriteLine("The package with ID number {0} has been sucessfully removed.", searchAndRemoveThisId);
+        }
+
+        internal void PrintSearchForBoxByIdAndMove()
+        {
+            Console.WriteLine("What is the id of the box you want to move?");
+            Console.Write("Enter ID number: ");
+        }
+
+        internal void PrintWhichLevelToMoveTo()
+        {
+            Console.WriteLine("To which level do you want to move the box to?");
+            Console.Write("Enter level: ");
+        }
+
+        internal void PrintNoBoxHasBeenMoved()
+        {
+            Console.WriteLine("The box has not been moved to its new location.");
+            Console.WriteLine("Due to invalid box ID or the new location has not enough room.");
+        }
+
+        internal void PrintBoxHasBeenMoved(int[] searchThisId)
+        {
+            Console.WriteLine("The box with ID number {0} has been moved.", searchThisId[0]);
+            Console.WriteLine("New position: level {0} rack {1}", searchThisId[1]+1, searchThisId[2]);
+        }
+
+        public void PrintExitProgramMessage()
+        {
+            Console.Clear();
+            Console.WriteLine("Thank you for using StorageShelfManager©");
+            Console.Write("Press any key to shut down program...");
+            Console.ReadKey();
+        }
+
+        
 
     }
 }

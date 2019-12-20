@@ -95,8 +95,25 @@ namespace StorageFacility
             }
 
             int[] result = new int[2] { level, rack };
-
+            Console.Clear();
             return result;
+        }
+
+        public int UserInputAnyNumber()
+        {
+            int number = 0;
+            bool sucessfullConversion = false;
+
+            while (sucessfullConversion == false)
+            {
+                sucessfullConversion = int.TryParse(Console.ReadLine(), out number);
+                if (sucessfullConversion == false)
+                {
+                    Console.Write("Invalid number, try again: ");
+                }
+            }
+            Console.Clear();
+            return number;
         }
     }
 }
