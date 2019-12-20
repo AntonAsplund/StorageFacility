@@ -103,6 +103,8 @@ namespace StorageFacility
                         }
                     case 5:
                         {   //Print a representation of storage facility or a visualization
+
+
                             break;
                         }
                     case 6:
