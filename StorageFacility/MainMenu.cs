@@ -9,6 +9,11 @@ namespace StorageFacility
 {
     class MainMenu
     {
+        /// <summary>
+        /// Holds the main and start of program. As well as a switch case menu used to call all methods. 
+        /// Here a new object of WareHouse type is new:ed, and that object is the core storage of the program.
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             WareHouse storageFacility = new WareHouse();

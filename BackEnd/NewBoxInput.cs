@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BackEnd
 {
+    /// <summary>
+    /// NewBoxInput objects are created by the "Front-End", and converted to correlating I3DObject boxes in the factory WareHouse. Holds a order slip given to the factory.
+    /// </summary>
     public class NewBoxInput
     {
         public decimal Weight { get; }

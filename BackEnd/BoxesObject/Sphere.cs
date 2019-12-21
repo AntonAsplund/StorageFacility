@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace BackEnd.BoxesObject
 {
-    [Serializable]
     /// <summary>
     /// An object of the type Sphere, which inherts from I3DObject
-    /// The
     /// </summary>
-    /// 
+    [Serializable]
     class Sphere : I3DObject
     {
         public int Id { get; }
@@ -36,13 +34,20 @@ namespace BackEnd.BoxesObject
             this.InsuranceValue = 0;
             this.radius = radius;
         }
-
+        /// <summary>
+        /// Makes a deep copy of the object 
+        /// </summary>
+        /// <returns></returns>
         public object Clone()
         {
             Sphere clonedSphere = new Sphere(this.Id, this.Weight, this.Description, this.IsFragile, this.radius);
 
             return clonedSphere;
         }
+        /// <summary>
+        /// Delivers a detailed description of the object through a string. Written with one detail on each line.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             string stringRepresentation = "";

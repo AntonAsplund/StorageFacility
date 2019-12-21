@@ -17,7 +17,7 @@ namespace StorageFacility
         /// <summary>
         /// Handles the creation of a new box. Calls methods for user input and delives a newboxinput object to the users specification
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A NewBoxInput object used to create a new I3DObject inherited object in facorty WareHouse.</returns>
         internal NewBoxInput CreateNewBox()
         {
             NewBoxInput newBox = new NewBoxInput();
@@ -81,9 +81,9 @@ namespace StorageFacility
             return newBox;
         }
         /// <summary>
-        /// Handles  if a box is considerd fragile or not. Returns a bool
+        /// Handles user input if a box is considerd fragile or not. 
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A bool indicating if object is fragile or not.</returns>
         private bool IsTheBoxFragileUserInput()
         {
             Console.Clear();
@@ -106,10 +106,10 @@ namespace StorageFacility
             Console.Clear();
             return isFragile;
         }
-
         /// <summary>
-        /// Handles method calls for a user to input id number to search for. Return int searchThisId
+        /// Handles method calls for a user to input id number to search for. 
         /// </summary>
+        /// <returns>An int holding the information about which ID user want to search for</returns>
         internal int GetSearchIdForBox()
         {
             Console.Clear();
@@ -120,9 +120,9 @@ namespace StorageFacility
         }
 
         /// <summary>
-        /// Gets a ID number of the box the user wants to remove. Returns int searchThisIdToRemove
+        /// Gets a ID number of the box the user wants to remove. 
         /// </summary>
-        /// <returns></returns>
+        /// <returns>An int holding the information about which ID user want to remove</returns>
         internal int GetRemoveIdOfBox()
         {
             Console.Clear();
@@ -135,7 +135,7 @@ namespace StorageFacility
         /// <summary>
         /// Get the ID number the user wants to move. Returns int array with [0] = id of box to move, [1] = level, [2] = rack
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns int array with [0] = id of box to move, [1] = level, [2] = rack</returns>
         internal int[] GetSearchIDAndPlaceForBoxToMove()
         {
             Console.Clear();
@@ -149,11 +149,8 @@ namespace StorageFacility
             return positionAndIdOfOldBox;
         }
         /// <summary>
-        /// Prints a list of all racks with information about ID and Description. Prints 5 racks at a time.
+        /// Method used to shorteing the code. Each switch case statement in main menu ends with the same call and messsage.
         /// </summary>
-        /// <param name="storageFacility">Takes the WareHouse obejct which holds the information about to be printed</param>
-        
-
         public void ContinueToMainMenu()
         {
             Console.WriteLine("\nPress any key to continue to main menu...");

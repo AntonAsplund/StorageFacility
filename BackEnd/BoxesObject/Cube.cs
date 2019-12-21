@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace BackEnd.BoxesObject
 {
-    [Serializable]
     /// <summary>
     /// An object of the type Cube, which inherts from I3DObject
     /// </summary>
+    [Serializable]
     class Cube : I3DObject
     {
         public int Id { get; }
@@ -34,13 +34,20 @@ namespace BackEnd.BoxesObject
             this.InsuranceValue = 0;
             this.side = side;
         }
-
+        /// <summary>
+        /// Makes a deep copy of the object
+        /// </summary>
+        /// <returns></returns>
         public object Clone()
         {
             Cube clonedCube = new Cube(this.Id, this.Weight, this.Description, this.IsFragile, this.side);
 
             return clonedCube;
         }
+        /// <summary>
+        /// Delivers a detailed description of the object through a string. Written with one detail on each line.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             string stringRepresentation = "";

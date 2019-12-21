@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BackEnd
 {
+    /// <summary>
+    /// An interface which supplies BoxesObject with a common set of propertys
+    /// </summary>
     public interface I3DObject : ICloneable
     {
         int Id { get; }

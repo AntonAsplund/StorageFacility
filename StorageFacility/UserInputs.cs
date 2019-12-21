@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace StorageFacility
 {
+    /// <summary>
+    /// Holds the user input methods used by front-end. With exception of a few "Console.ReadKey();".
+    /// </summary>
     class UserInputs
     {
         PrintTexts printTexts = new PrintTexts();
@@ -98,7 +101,10 @@ namespace StorageFacility
             Console.Clear();
             return result;
         }
-
+        /// <summary>
+        /// Input method that handles for when the user is supposed to input a number. Ensures no faulty data is entered in the program.
+        /// </summary>
+        /// <returns>Int with the number entered by user</returns>
         public int UserInputAnyNumber()
         {
             int number = 0;
@@ -115,7 +121,10 @@ namespace StorageFacility
             Console.Clear();
             return number;
         }
-
+        /// <summary>
+        /// Input handling for when user needs to input a length measurement.
+        /// </summary>
+        /// <returns>A int value holding the user weight input.</returns>
         internal int UserLengthInput()
         {
             bool sucessfullConversion = false;
@@ -140,7 +149,10 @@ namespace StorageFacility
             Console.Clear();
             return measurement;
         }
-
+        /// <summary>
+        /// Input handling when user needs to input a number from 1 to 4.
+        /// </summary>
+        /// <returns></returns>
         internal int UserInputOneToFour()
         {
             int userChoice = 0;
@@ -162,7 +174,10 @@ namespace StorageFacility
 
             return userChoice;
         }
-
+        /// <summary>
+        /// User inputs for when acess cases in the main menu.
+        /// </summary>
+        /// <returns>A int value with the users main menu choice</returns>
         internal int GetUserInputsForMainMenu()
         {
             int userChoice = 0;
@@ -184,7 +199,10 @@ namespace StorageFacility
 
             return userChoice;
         }
-
+        /// <summary>
+        /// User input handling when a number from 1 to 3 is needed.
+        /// </summary>
+        /// <returns></returns>
         internal int GetUserInputOneToThree()
         {
             int userChoice = 0;
@@ -206,7 +224,10 @@ namespace StorageFacility
 
             return userChoice;
         }
-
+        /// <summary>
+        /// Inout handling when giving a box a weight value. Handles faulty inputs of a negative number.
+        /// </summary>
+        /// <returns>A decimal value with the user given weight</returns>
         internal decimal UserWeightOfBoxInput()
         {
             Console.Clear();
@@ -222,7 +243,7 @@ namespace StorageFacility
                 {
                     Console.Write("Please enter a valid number, try again...");
                 }
-                else if (weightOfBox < 0 || weightOfBox > 1000)
+                else if (weightOfBox < 0 )
                 {
                     Console.Write("Please enter a valid weight in kilograms");
                     sucessfullConversion = false;
@@ -231,7 +252,10 @@ namespace StorageFacility
 
             return weightOfBox;
         }
-
+        /// <summary>
+        /// Handles input for when user is entering a level to print the rack contents of.
+        /// </summary>
+        /// <returns></returns>
         public int UserInputVisualizationLevel()
         {
             int userChoice = 0;
@@ -253,7 +277,10 @@ namespace StorageFacility
             userChoice--;   //Removes one from userChoice since level handling is zero based
             return userChoice;
         }
-
+        /// <summary>
+        /// Handles input for when users is entering rack number, for when user wants its contents.
+        /// </summary>
+        /// <returns></returns>
         public int UserInputVisualizationRack()
         {
             int userChoice = 0;

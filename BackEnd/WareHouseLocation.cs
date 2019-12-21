@@ -11,6 +11,10 @@ using System.IO;
 
 namespace BackEnd
 {
+    /// <summary>
+    /// Holds the information and limitation of each rack. As well as a few logical methods used when acessing and modifying a rack.
+    /// A multi dimensional array of this class is used to build the core of the storage facility program.
+    /// </summary>
     [Serializable]
     public class WareHouseLocation : IEnumerable<I3DObject>
     {
@@ -148,12 +152,18 @@ namespace BackEnd
 
             return informationPrintedOnConsoleWindow;
         }
-
+        /// <summary>
+        /// Implementation of the IEnumerable interface. Allowing foreach over WareHouseLocation objects.
+        /// </summary>
+        /// <returns></returns>
         IEnumerator<I3DObject> IEnumerable<I3DObject>.GetEnumerator()
         {
             return this.StorageSpace.GetEnumerator();
         }
-
+        /// <summary>
+        /// Implementation of the IEnumerable interface. Allowing foreach over WareHouseLocation objects.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator GetEnumerator()
         {
             return this.StorageSpace.GetEnumerator();

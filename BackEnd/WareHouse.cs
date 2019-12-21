@@ -11,6 +11,9 @@ using System.IO;
 
 namespace BackEnd
 {   
+    /// <summary>
+    /// Holds a multidimensional array of WareHouseLocation objects. The storage shelf and its racks.
+    /// </summary>
     [Serializable]
     public class WareHouse 
     {
@@ -39,7 +42,12 @@ namespace BackEnd
                 this.Id = GetHighestCurrentId();
             }
         }
-
+        /// <summary>
+        /// Indexer that could be used by the front-end to acess a specific rack in the multi dimensional array. Delivers a complete deep copy of the storage rack to the front-end
+        /// </summary>
+        /// <param name="level">Level where the rack is situated. Zero based</param>
+        /// <param name="rack">Rack number on the correct level. Based on 1 - 100. Not zero based.</param>
+        /// <returns></returns>
         public WareHouseLocation this[int level, int rack]
         {
             get
@@ -47,7 +55,10 @@ namespace BackEnd
                 return StorageShelf[level, rack].Content();
             }
         }
-
+        /// <summary>
+        /// Gets the highest current ID number of a box in the storage. Used in the constructor of WareHouse, as ID numbers lies as a property in WareHouse and is not saved on the serialized save file.
+        /// </summary>
+        /// <returns></returns>
         internal int GetHighestCurrentId()
         {
             int highestCurrentId = 0;
@@ -129,14 +140,14 @@ namespace BackEnd
 
             }
 
-            this.Id++; // Adds one to Id each time a box has been added or have been tried to be added to the storagerack facility
+            this.Id++; // Adds one to Id each time a box has been added or have been tried to be added to the storagerack facility. This ensuring that every box in storage has a unique ID number
 
             return boxSucessFullyAdded;
         }
         /// <summary>
         /// Loops through the storageshelf and find the first eligable position for the box thorough the method TryAdd in WareHouseLocation
         /// </summary>
-        /// <param name="newBox"></param>
+        /// <param name="newBox">The box of a I3DObject inherited type object, supposed to be added to storage</param>
         /// <returns></returns>
         internal bool TryAddBoxToStorage(I3DObject newBox)
         {
@@ -161,7 +172,7 @@ namespace BackEnd
         /// <param name="newBox">The object that contains the new box</param>
         /// <param name="level">The index position of the level that intended rack is on</param>
         /// <param name="rack">The index position of the intended rack</param>
-        /// <returns></returns>
+        /// <returns>Gives a bool that tells if the addition to specified rack was sucessfull or not.</returns>
         internal bool TryAddBoxToSpecifiedRack(I3DObject newBox, int level, int rack)
         {
             bool sucessfullyAdded = false;

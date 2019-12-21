@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace BackEnd.BoxesObject
 {
-    [Serializable]
+
     /// <summary>
     /// An object of the type Cuboid, which inherts from I3DObject
     /// </summary>
+    [Serializable]
     class Cuboid : I3DObject
     {
         public int Id { get; }
@@ -38,13 +39,20 @@ namespace BackEnd.BoxesObject
             this.ySide = ySide;
             this.zSide = zSide;
         }
-
+        /// <summary>
+        /// Makes a deep copy of the object 
+        /// </summary>
+        /// <returns></returns>
         public object Clone()
         {
             Cuboid clonedCuboid = new Cuboid(this.Id, this.Weight, this.Description, this.IsFragile, this.xSide, this.ySide, this.zSide);
 
             return clonedCuboid;
         }
+        /// <summary>
+        /// Delivers a detailed description of the object through a string. Written with one detail on each line.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             string stringRepresentation = "";
