@@ -55,11 +55,11 @@ namespace StorageFacility
                         string description = "Cuboid";
                         decimal weight = userInputs.UserWeightOfBoxInput();
                         bool isFragile = IsTheBoxFragileUserInput();
-                        Console.WriteLine("What is the length of side X?");
+                        Console.WriteLine("What is the width?");
                         int lengthSideX = userInputs.UserLengthInput();
-                        Console.WriteLine("What is the length of side Y?");
+                        Console.WriteLine("What is the height?");
                         int lengthSideY = userInputs.UserLengthInput();
-                        Console.WriteLine("What is the length of side Z?");
+                        Console.WriteLine("What is the depth?");
                         int lengthSideZ = userInputs.UserLengthInput();
 
                         NewBoxInput newCuboid = new NewBoxInput(weight, description, isFragile, lengthSideX, lengthSideY, lengthSideZ);

@@ -24,7 +24,8 @@ namespace StorageFacility
             Console.WriteLine("3: Remove a box from storage facility");
             Console.WriteLine("4: Move a stored box to a new location");
             Console.WriteLine("5. Show boxes in storage");
-            Console.WriteLine("6. Quit the program\n");
+            Console.WriteLine("6. Save the information to a database");
+            Console.WriteLine("7. Quit the program\n");
 
             Console.Write("Please choose a menu option: ");
 
@@ -34,7 +35,7 @@ namespace StorageFacility
         /// </summary>
         public void PrintCreateNewBoxInputCHoice()
         {
-            Console.WriteLine("Which is the type of your box?");
+            Console.WriteLine("Of what type is the box?");
             Console.WriteLine("");
             Console.WriteLine("1. Blob");
             Console.WriteLine("2. Cube");
@@ -69,7 +70,7 @@ namespace StorageFacility
             }
             else
             {
-                Console.WriteLine("No box has NOT been added due to an unforseen event");
+                Console.WriteLine("The box has NOT been added due to an unforseen event");
             }
 
         }
@@ -95,7 +96,7 @@ namespace StorageFacility
         /// </summary>
         public void PrintSearchForBoxById()
         {
-            Console.WriteLine("What is the id of the box you want to find?");
+            Console.WriteLine("What is the ID of the box you want to find?");
             Console.Write("Enter ID number: ");
         }
         /// <summary>
@@ -141,7 +142,7 @@ namespace StorageFacility
         /// </summary>
         internal void PrintSearchForBoxByIdAndMove()
         {
-            Console.WriteLine("What is the id of the box you want to move?");
+            Console.WriteLine("What is the ID of the box you want to move?");
             Console.Write("Enter ID number: ");
         }
         /// <summary>
@@ -275,6 +276,11 @@ namespace StorageFacility
                     }
                 }
             }
+        }
+
+        public void PrintSaveMainMenuOptionChoice()
+        {
+            Console.WriteLine("The program has been saved.");
         }
         /// <summary>
         /// Prints the text and handling for when the users exits the program.

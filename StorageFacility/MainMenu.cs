@@ -149,10 +149,17 @@ namespace StorageFacility
                             break;
                         }
                     case 6:
+                        {   //Saves the program
+                            printTexts.PrintSaveMainMenuOptionChoice();
+                            storageFacility.SerializeObject();
+                            break;
+                        }
+                    case 7:
                         {   //Exit the program
                             printTexts.PrintExitProgramMessage();
                             stayInMenu = false;
                             break;
+
                         }
                 }
             }
