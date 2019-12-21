@@ -110,13 +110,13 @@ namespace StorageFacility
                             {
                                 case 1:
                                     {
-                                        menuMethods.PrintAllRacksBasicList(storageFacility);
+                                        printTexts.PrintAllRacksBasicList(storageFacility);
                                         menuMethods.ContinueToMainMenu();
                                         break;
                                     }
                                 case 2:
                                     {
-                                        menuMethods.PrintContentsInDetailedListOneByOne(storageFacility);
+                                        printTexts.PrintContentsInDetailedListOneByOne(storageFacility);
                                         menuMethods.ContinueToMainMenu();
                                         break;
                                     }
@@ -135,7 +135,7 @@ namespace StorageFacility
                                     }
                                 case 4:
                                     {
-                                        menuMethods.PrintSimpleListNumberOfBoxes(storageFacility);
+                                        printTexts.PrintSimpleListNumberOfBoxes(storageFacility);
                                         menuMethods.ContinueToMainMenu();
                                         break;
                                     }

@@ -7,11 +7,17 @@ using BackEnd;
 
 namespace StorageFacility
 {
+    /// <summary>
+    /// Handles logical methods in use by the main menu
+    /// </summary>
     internal class MenuMethods
     {
         PrintTexts printText = new PrintTexts();
         UserInputs userInputs = new UserInputs();
-
+        /// <summary>
+        /// Handles the creation of a new box. Calls methods for user input and delives a newboxinput object to the users specification
+        /// </summary>
+        /// <returns></returns>
         internal NewBoxInput CreateNewBox()
         {
             NewBoxInput newBox = new NewBoxInput();
@@ -74,7 +80,10 @@ namespace StorageFacility
 
             return newBox;
         }
-
+        /// <summary>
+        /// Handles  if a box is considerd fragile or not. Returns a bool
+        /// </summary>
+        /// <returns></returns>
         private bool IsTheBoxFragileUserInput()
         {
             Console.Clear();
@@ -122,10 +131,6 @@ namespace StorageFacility
 
             return searchThisIdToRemove;
         }
-        public void MoveBox()
-        {
-
-        }
 
         /// <summary>
         /// Get the ID number the user wants to move. Returns int array with [0] = id of box to move, [1] = level, [2] = rack
@@ -143,76 +148,11 @@ namespace StorageFacility
 
             return positionAndIdOfOldBox;
         }
-
-        public void PrintAllRacksBasicList(WareHouse storageFacility)
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 1; j < 101; j++)
-                {
-                    Console.WriteLine("Level: {0} Rack: {1}", i + 1, j);
-                    foreach (I3DObject boxes in storageFacility[i, j])
-                    {
-                        Console.WriteLine("Id: " + boxes.Id.ToString() + "Description" + boxes.Description + "\n---");
-                    }
-                    if (j % 5 == 0)
-                    {
-                        Console.WriteLine("Press any key to continue to the next 5 racks");
-                        Console.ReadKey();
-                        Console.Clear();
-                    }
-                }
-            }
-        }
-
-        public void PrintContentsInDetailedListOneByOne(WareHouse storageFacility)
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 1; j < 101; j++)
-                {
-                    bool gotContent = false;
-                    Console.WriteLine("Level: {0} Rack: {1}", i + 1, j);
-                    foreach (I3DObject boxes in storageFacility[i, j])
-                    {
-                        Console.WriteLine(boxes.ToString());
-                        Console.WriteLine("---");
-                        gotContent = true;
-                    }
-                    if (gotContent == false)
-                    {
-                        Console.WriteLine("This rack contains no boxes.");
-                    }
-                    Console.WriteLine("Press any key to continue to the next rack");
-                    Console.ReadKey();
-                    Console.Clear();
-
-                }
-            }
-
-        }
-
-        public void PrintSimpleListNumberOfBoxes(WareHouse storageFacility)
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 1; j < 101; j++)
-                {
-                    int numberOfBoxesInRack = 0;
-                    foreach (I3DObject boxes in storageFacility[i, j])
-                    {
-                        numberOfBoxesInRack++;
-                    }
-                    Console.WriteLine("Level: {0} Rack: {1} - {2} number of boxes", i+1, j, numberOfBoxesInRack);
-                    if (j % 25 == 0)
-                    {
-                        Console.WriteLine("Press any key to continue to the next 25 racks.");
-                        Console.ReadKey();
-                        Console.Clear();
-                    }
-                }
-            }
-        }
+        /// <summary>
+        /// Prints a list of all racks with information about ID and Description. Prints 5 racks at a time.
+        /// </summary>
+        /// <param name="storageFacility">Takes the WareHouse obejct which holds the information about to be printed</param>
+        
 
         public void ContinueToMainMenu()
         {

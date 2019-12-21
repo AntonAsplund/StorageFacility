@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BackEnd;
 
 namespace StorageFacility
 {
@@ -130,7 +131,7 @@ namespace StorageFacility
             Console.WriteLine("1. A basic list 5 racks at a time.");
             Console.WriteLine("2. A detailed list 1 rack at a time");
             Console.WriteLine("3. A specific storage rack.");
-            Console.WriteLine("4. A list of all racks and number of box in them");
+            Console.WriteLine("4. A list of all racks and number of boxes in them");
         }
 
         internal void PrintLevelChoiceVisualizationSpecificLevel()
@@ -144,6 +145,82 @@ namespace StorageFacility
         {
             Console.WriteLine("\nWhat number does the rack have?");
             Console.Write("Rack: ");
+        }
+
+        public void PrintAllRacksBasicList(WareHouse storageFacility)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 1; j < 101; j++)
+                {
+                    Console.WriteLine("Level: {0} Rack: {1}", i + 1, j);
+                    foreach (I3DObject boxes in storageFacility[i, j])
+                    {
+                        Console.WriteLine("Id: " + boxes.Id.ToString() + "Description" + boxes.Description + "\n---");
+                    }
+                    if (j % 5 == 0)
+                    {
+                        Console.WriteLine("Press any key to continue to the next 5 racks");
+                        Console.ReadKey();
+                        Console.Clear();
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// Prints a list of all racks in detail. All relevant information. Prints one rack at a time
+        /// </summary>
+        /// <param name="storageFacility">Takes the WareHouse obejct which holds the information about to be printed</param>
+        public void PrintContentsInDetailedListOneByOne(WareHouse storageFacility)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 1; j < 101; j++)
+                {
+                    bool gotContent = false;
+                    Console.WriteLine("Level: {0} Rack: {1}", i + 1, j);
+                    foreach (I3DObject boxes in storageFacility[i, j])
+                    {
+                        Console.WriteLine(boxes.ToString());
+                        Console.WriteLine("---");
+                        gotContent = true;
+                    }
+                    if (gotContent == false)
+                    {
+                        Console.WriteLine("This rack contains no boxes.");
+                    }
+                    Console.WriteLine("Press any key to continue to the next rack");
+                    Console.ReadKey();
+                    Console.Clear();
+
+                }
+            }
+
+        }
+        /// <summary>
+        /// Prints a simple list detailing the level and rack number as well as the number of boxes in each rack.
+        /// </summary>
+        /// <param name="storageFacility">Takes the WareHouse obejct which holds the information about to be printed</param>
+        public void PrintSimpleListNumberOfBoxes(WareHouse storageFacility)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 1; j < 101; j++)
+                {
+                    int numberOfBoxesInRack = 0;
+                    foreach (I3DObject boxes in storageFacility[i, j])
+                    {
+                        numberOfBoxesInRack++;
+                    }
+                    Console.WriteLine("Level: {0} Rack: {1} - {2} number of boxes", i + 1, j, numberOfBoxesInRack);
+                    if (j % 25 == 0)
+                    {
+                        Console.WriteLine("Press any key to continue to the next 25 racks.");
+                        Console.ReadKey();
+                        Console.Clear();
+                    }
+                }
+            }
         }
 
         public void PrintExitProgramMessage()
