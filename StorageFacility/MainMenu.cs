@@ -39,13 +39,14 @@ namespace StorageFacility
                             if (addToFirstFreeSpace == true)
                             {
                                 bool sucessfullAddition = storageFacility.ConvertAndAddFromUserInput(newBox, addToFirstFreeSpace);
-                                printTexts.PrintResultOfBoxAdditionToStorage(sucessfullAddition);
+                                int[] positionOfBox = storageFacility.FindBox(storageFacility.Id - 1);
+                                printTexts.PrintResultOfBoxAdditionToStorage(sucessfullAddition, positionOfBox, storageFacility.Id-1);
                             }
                             else 
                             {
                                 int[] userSpecifiedPlace = userInputs.UserLevelAndRackInput(); //Fick input för användare som vill lägga till på specifik plats.
                                 bool sucessfullAddition = storageFacility.ConvertAndAddFromUserInput(newBox, addToFirstFreeSpace, userSpecifiedPlace[0], userSpecifiedPlace[1]);
-                                printTexts.PrintResultOfBoxAdditionToStorage(sucessfullAddition);
+                                printTexts.PrintResultOfBoxAdditionToStorage(sucessfullAddition,userSpecifiedPlace, storageFacility.Id-1);
                             }
                             storageFacility.SerializeObject();
                             break;
@@ -123,6 +124,7 @@ namespace StorageFacility
             Console.WriteLine(storageFacility[level, rack].ToString());     //Anvädning av indexern till att skriva ut vad som finns på platsen
             menuMethods.PrintContentsOfEntireStorageShelf(storageFacility);
 
+            
             Console.ReadKey();
 
 

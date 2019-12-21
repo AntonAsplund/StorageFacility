@@ -15,7 +15,7 @@ namespace BackEnd
     public class WareHouse 
     {
         private WareHouseLocation[,] StorageShelf { get; }
-        private int Id { get; set; }
+        public int Id { get; set; }
         public WareHouse()
         {
             try
@@ -255,8 +255,8 @@ namespace BackEnd
         public void SerializeObject()
         {
             IFormatter formatter = new BinaryFormatter();
-            File.Delete("wareHouseSaveFile.txt");
-            Stream stream = new FileStream("wareHouseSaveFile.txt", FileMode.Create, FileAccess.Write);
+            //File.Delete("wareHouseSaveFile.txt");
+            Stream stream = new FileStream("wareHouseSaveFile.txt", FileMode.OpenOrCreate, FileAccess.Write);
 
             formatter.Serialize(stream, this.StorageShelf);
             stream.Close();

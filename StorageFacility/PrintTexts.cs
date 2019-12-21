@@ -43,11 +43,11 @@ namespace StorageFacility
             Console.Write("Please choose a menu option: ");
         }
 
-        public void PrintResultOfBoxAdditionToStorage(bool sucessfullAddition)
+        public void PrintResultOfBoxAdditionToStorage(bool sucessfullAddition, int[] rackPosition, int boxId)
         {
             if (sucessfullAddition == true)
             {
-                Console.WriteLine("The box has been sucessfully added");
+                Console.WriteLine("The box {0} has been sucessfully added to Level: {1} Rack:{2}",boxId, rackPosition[0]+1, rackPosition[1]);
             }
             else
             {
