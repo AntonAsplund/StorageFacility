@@ -208,10 +208,12 @@ namespace StorageFacility
             {
                 for (int j = 1; j < 101; j++)
                 {
+                    Console.WriteLine("--------------------");
                     Console.WriteLine("Level: {0} Rack: {1}", i + 1, j);
+                    Console.WriteLine("--------------------");
                     foreach (I3DObject boxes in storageFacility[i, j])
                     {
-                        Console.WriteLine("Id: " + boxes.Id.ToString() + " Description " + boxes.Description + "\n---");
+                        Console.WriteLine("Id: " + boxes.Id.ToString() + "\nDescription " + boxes.Description + "\n---");
                     }
                     if (j % 5 == 0)
                     {
