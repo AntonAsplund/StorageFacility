@@ -52,9 +52,11 @@ namespace BackEnd.BoxesObject
         {
             string stringRepresentation = "";
 
-            stringRepresentation = "ID: " + this.Id.ToString();
-            stringRepresentation += "\n Description: " + this.Description;
-            stringRepresentation += "\n Weight: " + this.Weight.ToString();
+            stringRepresentation = "ID: " + this.Id.ToString()
+                                + "\n Description: " + this.Description
+                                + "\n Weight: " + this.Weight.ToString() + "(kg)"
+                                + "\n Dimensions: " + this.side.ToString() + " x " + this.side.ToString() + " x " + this.side.ToString() + "(cm)"
+                                + "\n Fragile: " + this.IsFragile;
 
             return stringRepresentation;
         }

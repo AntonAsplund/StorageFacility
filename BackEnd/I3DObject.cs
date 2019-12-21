@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BackEnd
 {
-    internal interface I3DObject : ICloneable
+    public interface I3DObject : ICloneable
     {
         int Id { get; }
         long Volume { get; }

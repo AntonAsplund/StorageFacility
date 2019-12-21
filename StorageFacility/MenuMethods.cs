@@ -12,46 +12,11 @@ namespace StorageFacility
         PrintTexts printText = new PrintTexts();
         UserInputs userInputs = new UserInputs();
 
-        internal int GetUserInputsForMainMenu()
-        {
-            int userChoice = 0;
-            bool sucessfullConversion = false;
-
-            while (sucessfullConversion == false)
-            {
-                sucessfullConversion = int.TryParse(Console.ReadLine(), out userChoice);
-                if (sucessfullConversion == false)
-                {
-                    Console.WriteLine("Please do only write numbers");
-                }
-                else if (userChoice < 1 || userChoice > 6)
-                {
-                    Console.WriteLine("Please enter a valid menu choice");
-                    sucessfullConversion = false;
-                }
-            }
-
-            return userChoice;
-        }
         internal NewBoxInput CreateNewBox()
         {
             NewBoxInput newBox = new NewBoxInput();
             printText.PrintCreateNewBoxInputCHoice();
-            int userChoice = 0;
-            bool sucessfullConversion = false;
-            while (sucessfullConversion == false)
-            {
-                sucessfullConversion = int.TryParse(Console.ReadLine(), out userChoice);
-                if (sucessfullConversion == false)
-                {
-                    Console.WriteLine("Please enter a valid number, try again...");
-                }
-                else if (userChoice < 1 || userChoice > 4)
-                {
-                    Console.WriteLine("Please enter a valid menu choice");
-                    sucessfullConversion = false;
-                }
-            }
+            int userChoice = userInputs.UserInputOneToFour();
 
             Console.Clear();
 
@@ -60,10 +25,10 @@ namespace StorageFacility
                 case 1:
                     {
                         string description = "Blob";
-                        decimal weight = UserWeightOfBoxInput();
+                        decimal weight = userInputs.UserWeightOfBoxInput();
                         bool isFragile = true;
                         Console.WriteLine("What is the length of one side?");
-                        int lengthSideX = UserLengthInput();
+                        int lengthSideX = userInputs.UserLengthInput();
 
                         NewBoxInput newBlob = new NewBoxInput(weight, description, isFragile, lengthSideX);
                         return newBlob;
@@ -71,10 +36,10 @@ namespace StorageFacility
                 case 2:
                     {
                         string description = "Cube";
-                        decimal weight = UserWeightOfBoxInput();
+                        decimal weight = userInputs.UserWeightOfBoxInput();
                         bool isFragile = IsTheBoxFragileUserInput();
                         Console.WriteLine("What is the length of one side?");
-                        int lengthSideX = UserLengthInput();
+                        int lengthSideX = userInputs.UserLengthInput();
 
                         NewBoxInput newCube = new NewBoxInput(weight, description, isFragile, lengthSideX);
                         return newCube;
@@ -82,14 +47,14 @@ namespace StorageFacility
                 case 3:
                     {
                         string description = "Cuboid";
-                        decimal weight = UserWeightOfBoxInput();
+                        decimal weight = userInputs.UserWeightOfBoxInput();
                         bool isFragile = IsTheBoxFragileUserInput();
                         Console.WriteLine("What is the length of side X?");
-                        int lengthSideX = UserLengthInput();
+                        int lengthSideX = userInputs.UserLengthInput();
                         Console.WriteLine("What is the length of side Y?");
-                        int lengthSideY = UserLengthInput();
+                        int lengthSideY = userInputs.UserLengthInput();
                         Console.WriteLine("What is the length of side Z?");
-                        int lengthSideZ = UserLengthInput();
+                        int lengthSideZ = userInputs.UserLengthInput();
 
                         NewBoxInput newCuboid = new NewBoxInput(weight, description, isFragile, lengthSideX, lengthSideY, lengthSideZ);
                         return newCuboid;
@@ -97,10 +62,10 @@ namespace StorageFacility
                 case 4:
                     {
                         string description = "Sphere";
-                        decimal weight = UserWeightOfBoxInput();
+                        decimal weight = userInputs.UserWeightOfBoxInput();
                         bool isFragile = IsTheBoxFragileUserInput();
                         Console.WriteLine("What is the length of the radius?");
-                        int radius = UserLengthInput();
+                        int radius = userInputs.UserLengthInput();
 
                         NewBoxInput newSphere = new NewBoxInput(weight, description, isFragile, radius);
                         return newSphere;
@@ -109,30 +74,7 @@ namespace StorageFacility
 
             return newBox;
         }
-        private int UserLengthInput()
-        {
-            bool sucessfullConversion = false;
-            int measurement = 0;
 
-            Console.Write("Enter measurement in nearest centimeter: ");
-
-            while (sucessfullConversion == false)
-            {
-                sucessfullConversion = int.TryParse(Console.ReadLine(), out measurement);
-                if (sucessfullConversion == false)
-                {
-                    Console.Write("Enter a valid number, try again: ");
-                }
-                else if (measurement < 1 || measurement > 220)
-                {
-                    Console.Write("Please enter a value in between 1 and 220 centimeters");
-                    sucessfullConversion = false;
-                }
-            }
-
-            Console.Clear();
-            return measurement;
-        }
         private bool IsTheBoxFragileUserInput()
         {
             Console.Clear();
@@ -145,7 +87,7 @@ namespace StorageFacility
             Console.Write("\nEnter menu choice: ");
 
             int userChoice = userInputs.UserYesNoInput();
-            
+
 
             if (userChoice == 1)
             {
@@ -153,32 +95,9 @@ namespace StorageFacility
             }
 
             Console.Clear();
-            return isFragile; 
+            return isFragile;
         }
-        private decimal UserWeightOfBoxInput()
-        {
-            Console.Clear();
-            Console.Write("Please enter weight of box");
 
-            decimal weightOfBox = 0;
-            bool sucessfullConversion = false;
-
-            while (sucessfullConversion == false)
-            {
-                sucessfullConversion = decimal.TryParse(Console.ReadLine(), out weightOfBox);
-                if (sucessfullConversion == false)
-                {
-                    Console.Write("Please enter a valid number, try again...");
-                }
-                else if (weightOfBox < 0 || weightOfBox > 1000)
-                {
-                    Console.Write("Please enter a valid weight in kilograms");
-                    sucessfullConversion = false;
-                }
-            }
-
-            return weightOfBox;
-        }
         /// <summary>
         /// Handles method calls for a user to input id number to search for. Return int searchThisId
         /// </summary>
@@ -218,25 +137,81 @@ namespace StorageFacility
             printText.PrintSearchForBoxByIdAndMove();
             int moveThisId = userInputs.UserInputAnyNumber();
             printText.PrintWhichLevelToMoveTo();
-            int[] levelAndRackPosition = userInputs.UserLevelAndRackInput();
+            int[] levelAndRackPosition = userInputs.UserLevelAndRackInputForBoxAddition();
 
             int[] positionAndIdOfOldBox = new int[3] { moveThisId, levelAndRackPosition[0], levelAndRackPosition[1] };
 
             return positionAndIdOfOldBox;
         }
 
-        public void PrintContentsOfEntireStorageShelf(WareHouse storageFacility)
+        public void PrintAllRacksBasicList(WareHouse storageFacility)
         {
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 1; j < 101; j++)
                 {
-                    WareHouseLocation fack = storageFacility[i, j];
-                    Console.WriteLine(fack.ToString());
+                    Console.WriteLine("Level: {0} Rack: {1}", i + 1, j);
+                    foreach (I3DObject boxes in storageFacility[i, j])
+                    {
+                        Console.WriteLine("Id: " + boxes.Id.ToString() + "Description" + boxes.Description + "\n---");
+                    }
+                    if (j % 5 == 0)
+                    {
+                        Console.WriteLine("Press any key to continue to the next 5 racks");
+                        Console.ReadKey();
+                        Console.Clear();
+                    }
+                }
+            }
+        }
+
+        public void PrintContentsInDetailedListOneByOne(WareHouse storageFacility)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 1; j < 101; j++)
+                {
+                    bool gotContent = false;
+                    Console.WriteLine("Level: {0} Rack: {1}", i + 1, j);
+                    foreach (I3DObject boxes in storageFacility[i, j])
+                    {
+                        Console.WriteLine(boxes.ToString());
+                        Console.WriteLine("---");
+                        gotContent = true;
+                    }
+                    if (gotContent == false)
+                    {
+                        Console.WriteLine("This rack contains no boxes.");
+                    }
+                    Console.WriteLine("Press any key to continue to the next rack");
+                    Console.ReadKey();
+                    Console.Clear();
 
                 }
             }
-         
+
+        }
+
+        public void PrintSimpleListNumberOfBoxes(WareHouse storageFacility)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 1; j < 101; j++)
+                {
+                    int numberOfBoxesInRack = 0;
+                    foreach (I3DObject boxes in storageFacility[i, j])
+                    {
+                        numberOfBoxesInRack++;
+                    }
+                    Console.WriteLine("Level: {0} Rack: {1} - {2} number of boxes", i+1, j, numberOfBoxesInRack);
+                    if (j % 25 == 0)
+                    {
+                        Console.WriteLine("Press any key to continue to the next 25 racks.");
+                        Console.ReadKey();
+                        Console.Clear();
+                    }
+                }
+            }
         }
 
         public void ContinueToMainMenu()

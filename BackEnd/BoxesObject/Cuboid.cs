@@ -24,7 +24,7 @@ namespace BackEnd.BoxesObject
         public int ySide { get; }
         public int zSide { get; }
 
-        public Cuboid(int id, decimal weight, string description, bool isFragile, int xSide, int ySide, int zSide)
+        internal Cuboid(int id, decimal weight, string description, bool isFragile, int xSide, int ySide, int zSide)
         {
             this.Id = id;
             this.Volume = xSide * ySide * zSide;
@@ -49,9 +49,11 @@ namespace BackEnd.BoxesObject
         {
             string stringRepresentation = "";
 
-            stringRepresentation = "ID: " + this.Id.ToString();
-            stringRepresentation += "\n Description: " + this.Description;
-            stringRepresentation += "\n Weight: " + this.Weight.ToString();
+            stringRepresentation = "ID: " + this.Id.ToString()
+                                + "\n Description: " + this.Description
+                                + "\n Weight: " + this.Weight.ToString() + "(kg)"
+                                + "\n Dimensions: " + this.xSide.ToString() + " x " + this.ySide.ToString() + " x " + this.zSide.ToString() + "(cm)"
+                                + "\n Fragile: " + this.IsFragile;
 
             return stringRepresentation;
         }

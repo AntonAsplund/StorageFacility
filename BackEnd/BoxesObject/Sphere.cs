@@ -24,7 +24,7 @@ namespace BackEnd.BoxesObject
         public decimal InsuranceValue { get; set; }
         public int radius { get; }
 
-        public Sphere(int id, decimal weight, string description, bool isFragile, int radius)
+        internal Sphere(int id, decimal weight, string description, bool isFragile, int radius)
         {
             this.Id = id;
             this.Volume = (radius * 2) * (radius * 2) * (radius * 2);
@@ -46,10 +46,14 @@ namespace BackEnd.BoxesObject
         public override string ToString()
         {
             string stringRepresentation = "";
+            int side = this.radius * 2;
 
-            stringRepresentation = "ID: " + this.Id.ToString();
-            stringRepresentation += "\n Description: " + this.Description;
-            stringRepresentation += "\n Weight: " + this.Weight.ToString();
+            stringRepresentation = "ID: " + this.Id.ToString()
+                                + "\n Description: " + this.Description
+                                + "\n Weight: " + this.Weight.ToString() + "(kg)"
+                                + "\n Dimensions: " + side.ToString() + " x " + side.ToString() + " x " + side.ToString() + "(cm)"
+                                + "\n Sphere radius: " + this.radius.ToString() + "(cm)"
+                                + "\n Fragile: " + this.IsFragile;
 
             return stringRepresentation;
         }

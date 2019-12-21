@@ -55,7 +55,7 @@ namespace StorageFacility
         /// Handles users input of choosen level and rack position. Level is zero based, thus users choice is decreased by one. While rack position is same as users input
         /// </summary>
         /// <returns>int array with [0] being level position zero based, and [1] rack position user based</returns>
-        public int[] UserLevelAndRackInput()
+        public int[] UserLevelAndRackInputForBoxAddition()
         {
             printTexts.PrintAddBoxToSpecifiedLevel();
             int level = 0;
@@ -114,6 +114,165 @@ namespace StorageFacility
             }
             Console.Clear();
             return number;
+        }
+
+        internal int UserLengthInput()
+        {
+            bool sucessfullConversion = false;
+            int measurement = 0;
+
+            Console.Write("Enter measurement in nearest centimeter: ");
+
+            while (sucessfullConversion == false)
+            {
+                sucessfullConversion = int.TryParse(Console.ReadLine(), out measurement);
+                if (sucessfullConversion == false)
+                {
+                    Console.Write("Enter a valid number, try again: ");
+                }
+                else if (measurement < 1 || measurement > 220)
+                {
+                    Console.Write("Please enter a value in between 1 and 220 centimeters");
+                    sucessfullConversion = false;
+                }
+            }
+
+            Console.Clear();
+            return measurement;
+        }
+
+        internal int UserInputOneToFour()
+        {
+            int userChoice = 0;
+
+            bool sucessfullConversion = false;
+            while (sucessfullConversion == false)
+            {
+                sucessfullConversion = int.TryParse(Console.ReadLine(), out userChoice);
+                if (sucessfullConversion == false)
+                {
+                    Console.WriteLine("Please enter a valid number, try again...");
+                }
+                else if (userChoice < 1 || userChoice > 4)
+                {
+                    Console.WriteLine("Please enter a valid menu choice");
+                    sucessfullConversion = false;
+                }
+            }
+
+            return userChoice;
+        }
+
+        internal int GetUserInputsForMainMenu()
+        {
+            int userChoice = 0;
+            bool sucessfullConversion = false;
+
+            while (sucessfullConversion == false)
+            {
+                sucessfullConversion = int.TryParse(Console.ReadLine(), out userChoice);
+                if (sucessfullConversion == false)
+                {
+                    Console.WriteLine("Please do only write numbers");
+                }
+                else if (userChoice < 1 || userChoice > 6)
+                {
+                    Console.WriteLine("Please enter a valid menu choice");
+                    sucessfullConversion = false;
+                }
+            }
+
+            return userChoice;
+        }
+
+        internal int GetUserInputOneToThree()
+        {
+            int userChoice = 0;
+            bool sucessfullConversion = false;
+
+            while (sucessfullConversion == false)
+            {
+                sucessfullConversion = int.TryParse(Console.ReadLine(), out userChoice);
+                if (sucessfullConversion == false)
+                {
+                    Console.WriteLine("Please do only write numbers");
+                }
+                else if (userChoice < 1 || userChoice > 4)
+                {
+                    Console.WriteLine("Please enter a valid menu choice");
+                    sucessfullConversion = false;
+                }
+            }
+
+            return userChoice;
+        }
+
+        internal decimal UserWeightOfBoxInput()
+        {
+            Console.Clear();
+            Console.Write("Please enter weight of box");
+
+            decimal weightOfBox = 0;
+            bool sucessfullConversion = false;
+
+            while (sucessfullConversion == false)
+            {
+                sucessfullConversion = decimal.TryParse(Console.ReadLine(), out weightOfBox);
+                if (sucessfullConversion == false)
+                {
+                    Console.Write("Please enter a valid number, try again...");
+                }
+                else if (weightOfBox < 0 || weightOfBox > 1000)
+                {
+                    Console.Write("Please enter a valid weight in kilograms");
+                    sucessfullConversion = false;
+                }
+            }
+
+            return weightOfBox;
+        }
+
+        public int UserInputVisualizationLevel()
+        {
+            int userChoice = 0;
+            bool sucessfullConversion = false;
+
+            while (sucessfullConversion == false)
+            {
+                sucessfullConversion = int.TryParse(Console.ReadLine(), out userChoice);
+                if (sucessfullConversion == false)
+                {
+                    Console.Write("Please enter a valid number, try again: ");
+                }
+                else if (userChoice < 1 || userChoice > 3)
+                {
+                    Console.Write("Please enter a number within scope 1-3, try again: ");
+                }
+            }
+
+            userChoice--;   //Removes one from userChoice since level handling is zero based
+            return userChoice;
+        }
+
+        public int UserInputVisualizationRack()
+        {
+            int userChoice = 0;
+            bool sucessfullConversion = false;
+
+            while (sucessfullConversion == false)
+            {
+                sucessfullConversion = int.TryParse(Console.ReadLine(), out userChoice);
+                if (sucessfullConversion == false)
+                {
+                    Console.Write("Please enter a valid number, try again: ");
+                }
+                else if (userChoice < 1 || userChoice > 100)
+                {
+                    Console.Write("Please enter a number within scope 1-100, try again: ");
+                }
+            }
+
+            return userChoice;
         }
     }
 }

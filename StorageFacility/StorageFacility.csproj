@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddTestCases.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="MenuMethods.cs" />
     <Compile Include="PrintTexts.cs" />

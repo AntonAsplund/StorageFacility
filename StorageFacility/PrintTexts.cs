@@ -47,20 +47,20 @@ namespace StorageFacility
         {
             if (sucessfullAddition == true)
             {
-                Console.WriteLine("The box {0} has been sucessfully added to Level: {1} Rack:{2}",boxId, rackPosition[0]+1, rackPosition[1]);
+                Console.WriteLine("The box {0} has been sucessfully added to Level: {1} Rack:{2}", boxId, rackPosition[0] + 1, rackPosition[1]);
             }
             else
             {
                 Console.WriteLine("No box has NOT been added due to an unforseen event");
             }
-            
+
         }
 
         public void PrintAddBoxToSpecifiedLevel()
         {
             Console.Clear();
             Console.WriteLine("On what level is the rack?");
-            Console.Write("Level : "); 
+            Console.Write("Level : ");
         }
         public void PrintAddBoxToSpecifiedRack()
         {
@@ -84,7 +84,7 @@ namespace StorageFacility
         public void PrintPositionOfBox(int[] positionOfBox)
         {
             Console.WriteLine("The position of the box is:");
-            Console.WriteLine("Level: {0}", positionOfBox[0]+1);
+            Console.WriteLine("Level: {0}", positionOfBox[0] + 1);
             Console.WriteLine("Rack: {0}", positionOfBox[1]);
             Console.WriteLine("Rack slot: {0}", positionOfBox[2]);
         }
@@ -121,7 +121,29 @@ namespace StorageFacility
         internal void PrintBoxHasBeenMoved(int[] searchThisId)
         {
             Console.WriteLine("The box with ID number {0} has been moved.", searchThisId[0]);
-            Console.WriteLine("New position: level {0} rack {1}", searchThisId[1]+1, searchThisId[2]);
+            Console.WriteLine("New position: level {0} rack {1}", searchThisId[1] + 1, searchThisId[2]);
+        }
+
+        internal void PrintMenuChoicePrintVisualization()
+        {
+            Console.WriteLine("In which way do you want to see the storage?");
+            Console.WriteLine("1. A basic list 5 racks at a time.");
+            Console.WriteLine("2. A detailed list 1 rack at a time");
+            Console.WriteLine("3. A specific storage rack.");
+            Console.WriteLine("4. A list of all racks and number of box in them");
+        }
+
+        internal void PrintLevelChoiceVisualizationSpecificLevel()
+        {
+            Console.Clear();
+            Console.WriteLine("On what level is the rack?");
+            Console.Write("Level : ");
+        }
+
+        internal void PrintLevelChoiceVisualizationSpecificRack()
+        {
+            Console.WriteLine("\nWhat number does the rack have?");
+            Console.Write("Rack: ");
         }
 
         public void PrintExitProgramMessage()

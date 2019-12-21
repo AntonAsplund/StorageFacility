@@ -22,15 +22,14 @@ namespace StorageFacility
             while (stayInMenu)
             {
                 printTexts.PrintMainMenu();
-                int userMenuChoice = menuMethods.GetUserInputsForMainMenu();
+                int userMenuChoice = userInputs.GetUserInputsForMainMenu();
 
 
                 switch (userMenuChoice)
                 {
 
                     case 1:
-                        {
-                            //Store a new box
+                        {   //Store a new box
                             NewBoxInput newBox = menuMethods.CreateNewBox();
                             printTexts.PrintAddBoxToSpecifiedRackOrNotMenu();
                             int userChoice = userInputs.UserYesNoInput();
@@ -44,7 +43,7 @@ namespace StorageFacility
                             }
                             else 
                             {
-                                int[] userSpecifiedPlace = userInputs.UserLevelAndRackInput(); //Fick input för användare som vill lägga till på specifik plats.
+                                int[] userSpecifiedPlace = userInputs.UserLevelAndRackInputForBoxAddition(); //Fick input för användare som vill lägga till på specifik plats.
                                 bool sucessfullAddition = storageFacility.ConvertAndAddFromUserInput(newBox, addToFirstFreeSpace, userSpecifiedPlace[0], userSpecifiedPlace[1]);
                                 printTexts.PrintResultOfBoxAdditionToStorage(sucessfullAddition,userSpecifiedPlace, storageFacility.Id-1);
                             }
@@ -104,8 +103,44 @@ namespace StorageFacility
                         }
                     case 5:
                         {   //Print a representation of storage facility or a visualization
+                            printTexts.PrintMenuChoicePrintVisualization();
+                            int userPrintMenuChoice = userInputs.GetUserInputOneToThree();
 
+                            switch (userPrintMenuChoice)
+                            {
+                                case 1:
+                                    {
+                                        menuMethods.PrintAllRacksBasicList(storageFacility);
+                                        menuMethods.ContinueToMainMenu();
+                                        break;
+                                    }
+                                case 2:
+                                    {
+                                        menuMethods.PrintContentsInDetailedListOneByOne(storageFacility);
+                                        menuMethods.ContinueToMainMenu();
+                                        break;
+                                    }
+                                case 3:
+                                    {
+                                        printTexts.PrintLevelChoiceVisualizationSpecificLevel();
+                                        int levelChoice = userInputs.UserInputVisualizationLevel();
+                                        printTexts.PrintLevelChoiceVisualizationSpecificRack();
+                                        int rackChoice = userInputs.UserInputVisualizationRack();
 
+                                        Console.Clear();
+                                        storageFacility[levelChoice, rackChoice].ToString();
+
+                                        menuMethods.ContinueToMainMenu();
+                                        break;
+                                    }
+                                case 4:
+                                    {
+                                        menuMethods.PrintSimpleListNumberOfBoxes(storageFacility);
+                                        menuMethods.ContinueToMainMenu();
+                                        break;
+                                    }
+                            }
+                            
                             break;
                         }
                     case 6:
@@ -116,24 +151,6 @@ namespace StorageFacility
                         }
                 }
             }
-
-
-
-            int level = 2;
-            int rack = 99;
-            Console.WriteLine(storageFacility[level, rack].ToString());     //Anvädning av indexern till att skriva ut vad som finns på platsen
-            menuMethods.PrintContentsOfEntireStorageShelf(storageFacility);
-
-            
-            Console.ReadKey();
-
-
-
-
-
-            
         }
-
-
     }
 }
