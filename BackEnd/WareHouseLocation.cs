@@ -51,20 +51,15 @@ namespace BackEnd
         internal bool TryAdd(I3DObject box)
         {
             bool sucessfullyAdded = false;
-            if (box.IsFragile == true && this.RemainingWeight == this.MaxWeight 
-                && 0 <= (this.RemainingVolume - box.Volume) 
-                && 0 <= (this.RemainingWeight - box.Weight) 
-                &&  this.Height > box.MaxDimension)
+            if (box.IsFragile == true && this.RemainingWeight == this.MaxWeight && 0 <= (this.RemainingVolume - box.Volume) && 0 <= (this.RemainingWeight - box.Weight) &&  this.Height > box.MaxDimension)
             {
                 this.StorageSpace.Add(box);
                 this.RemainingVolume = this.RemainingVolume - box.Volume;
                 this.RemainingWeight = this.RemainingWeight - box.Weight;
+                this.ContainsFragile = true;
                 sucessfullyAdded = true;
             }
-            else if (0 <= (this.RemainingVolume - box.Volume) 
-                && 0 <= (this.RemainingWeight - box.Weight) 
-                && this.ContainsFragile == false 
-                && this.Height > box.MaxDimension)
+            else if (0 <= (this.RemainingVolume - box.Volume) && 0 <= (this.RemainingWeight - box.Weight) && this.ContainsFragile == false && this.Height > box.MaxDimension && box.IsFragile == false)
             {
                 this.StorageSpace.Add(box);
                 this.RemainingVolume = this.RemainingVolume - box.Volume;
@@ -106,6 +101,7 @@ namespace BackEnd
             {
                 this.RemainingWeight = this.RemainingWeight + this.StorageSpace[index].Weight;
                 this.RemainingVolume = this.RemainingVolume + this.StorageSpace[index].Volume;
+                this.ContainsFragile = false;
                 this.StorageSpace.RemoveAt(index);
                 boxRemoved = true;
             }

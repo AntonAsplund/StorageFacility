@@ -48,11 +48,12 @@ namespace StorageFacility
                             }
                             else 
                             {
-                                int[] userSpecifiedPlace = userInputs.UserLevelAndRackInputForBoxAddition(); //Fick input för användare som vill lägga till på specifik plats.
+                                int[] userSpecifiedPlace = userInputs.UserLevelAndRackInputForBoxAddition(); 
                                 bool sucessfullAddition = storageFacility.ConvertAndAddFromUserInput(newBox, addToFirstFreeSpace, userSpecifiedPlace[0], userSpecifiedPlace[1]);
                                 printTexts.PrintResultOfBoxAdditionToStorage(sucessfullAddition,userSpecifiedPlace, storageFacility.Id-1);
                             }
                             storageFacility.SerializeObject();
+                            menuMethods.ContinueToMainMenu();
                             break;
                         }
                     case 2:
@@ -62,14 +63,13 @@ namespace StorageFacility
                             if (positionOfBox[0] < 0)
                             {
                                 printTexts.PrintNoBoxIsFound(searchThisId);
-                                menuMethods.ContinueToMainMenu();
                             }
                             else
                             {
                                 printTexts.PrintPositionOfBox(positionOfBox);
-                                menuMethods.ContinueToMainMenu();
                             }
                             storageFacility.SerializeObject();
+                            menuMethods.ContinueToMainMenu();
                             break;
                         }
                     case 3:
@@ -79,14 +79,13 @@ namespace StorageFacility
                             if (sucessfulltRemoved == false)
                             {
                                 printTexts.PrintNoBoxIsFound(searchAndRemoveThisId);
-                                menuMethods.ContinueToMainMenu();
                             }
                             else
                             {
                                 printTexts.PrintSucessfullRemovalOfBox(searchAndRemoveThisId);
-                                menuMethods.ContinueToMainMenu();
                             }
                             storageFacility.SerializeObject();
+                            menuMethods.ContinueToMainMenu();
                             break;
                         }
                     case 4:
@@ -96,14 +95,13 @@ namespace StorageFacility
                             if (sucessfullMoveOfBox == false)
                             {
                                 printTexts.PrintNoBoxHasBeenMoved();
-                                menuMethods.ContinueToMainMenu();
                             }
                             else
                             {
                                 printTexts.PrintBoxHasBeenMoved(idOfBoxAndNewPosition);
-                                menuMethods.ContinueToMainMenu();
                             }
                             storageFacility.SerializeObject();
+                            menuMethods.ContinueToMainMenu();
                             break;
                         }
                     case 5:
@@ -116,13 +114,11 @@ namespace StorageFacility
                                 case 1:
                                     {
                                         printTexts.PrintAllRacksBasicList(storageFacility);
-                                        menuMethods.ContinueToMainMenu();
                                         break;
                                     }
                                 case 2:
                                     {
                                         printTexts.PrintContentsInDetailedListOneByOne(storageFacility);
-                                        menuMethods.ContinueToMainMenu();
                                         break;
                                     }
                                 case 3:
@@ -131,32 +127,30 @@ namespace StorageFacility
                                         int levelChoice = userInputs.UserInputVisualizationLevel();
                                         printTexts.PrintLevelChoiceVisualizationSpecificRack();
                                         int rackChoice = userInputs.UserInputVisualizationRack();
-
                                         Console.Clear();
-                                        storageFacility[levelChoice, rackChoice].ToString();
-
-                                        menuMethods.ContinueToMainMenu();
+                                        Console.WriteLine(storageFacility[levelChoice, rackChoice].ToString());
                                         break;
                                     }
                                 case 4:
                                     {
                                         printTexts.PrintSimpleListNumberOfBoxes(storageFacility);
-                                        menuMethods.ContinueToMainMenu();
                                         break;
                                     }
                             }
-                            
+                            menuMethods.ContinueToMainMenu();
                             break;
                         }
                     case 6:
                         {   //Saves the program
                             printTexts.PrintSaveMainMenuOptionChoice();
                             storageFacility.SerializeObject();
+                            menuMethods.ContinueToMainMenu();
                             break;
                         }
                     case 7:
                         {   //Exit the program
                             printTexts.PrintExitProgramMessage();
+                            storageFacility.SerializeObject();
                             stayInMenu = false;
                             break;
 

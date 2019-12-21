@@ -196,7 +196,7 @@ namespace StorageFacility
                     sucessfullConversion = false;
                 }
             }
-
+            Console.Clear();
             return userChoice;
         }
         /// <summary>
@@ -231,7 +231,7 @@ namespace StorageFacility
         internal decimal UserWeightOfBoxInput()
         {
             Console.Clear();
-            Console.Write("Please enter weight of box");
+            Console.Write("Please enter weight of box: ");
 
             decimal weightOfBox = 0;
             bool sucessfullConversion = false;
@@ -241,11 +241,11 @@ namespace StorageFacility
                 sucessfullConversion = decimal.TryParse(Console.ReadLine(), out weightOfBox);
                 if (sucessfullConversion == false)
                 {
-                    Console.Write("Please enter a valid number, try again...");
+                    Console.Write("Please enter a valid number, try again: ");
                 }
-                else if (weightOfBox < 0 )
+                else if (weightOfBox < 0.001M )
                 {
-                    Console.Write("Please enter a valid weight in kilograms");
+                    Console.Write("Please enter a valid weight in kilograms: ");
                     sucessfullConversion = false;
                 }
             }
@@ -271,6 +271,7 @@ namespace StorageFacility
                 else if (userChoice < 1 || userChoice > 3)
                 {
                     Console.Write("Please enter a number within scope 1-3, try again: ");
+                    sucessfullConversion = false;
                 }
             }
 
@@ -296,6 +297,7 @@ namespace StorageFacility
                 else if (userChoice < 1 || userChoice > 100)
                 {
                     Console.Write("Please enter a number within scope 1-100, try again: ");
+                    sucessfullConversion = false;
                 }
             }
 

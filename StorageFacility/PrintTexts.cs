@@ -49,9 +49,9 @@ namespace StorageFacility
         /// </summary>
         public void PrintAddBoxToSpecifiedRackOrNotMenu()
         {
-            Console.WriteLine("Do you want to add the box to first free or a specified rack?");
-            Console.WriteLine("1. Yes");
-            Console.WriteLine("2. No\n");
+            Console.WriteLine("Do you want to add the box to the first free or a specified rack?");
+            Console.WriteLine("1. First free");
+            Console.WriteLine("2. Specified rack\n");
 
             Console.Write("Please choose a menu option: ");
         }
@@ -70,7 +70,7 @@ namespace StorageFacility
             }
             else
             {
-                Console.WriteLine("The box has NOT been added due to an unforseen event");
+                Console.WriteLine("The box has NOT been added due to it being too big, too heavy or not enough room in storage facility.");
             }
 
         }
@@ -106,9 +106,9 @@ namespace StorageFacility
         public void PrintNoBoxIsFound(int searchThisId)
         {
             Console.Clear();
-            Console.WriteLine("No box has been found in the system.");
+            Console.WriteLine("No box has been found in the system.\n");
             Console.WriteLine("Have you entered correct id number?");
-            Console.WriteLine(" Written ID number: {0}", searchThisId);
+            Console.WriteLine("Written ID number: {0}", searchThisId);
         }
         /// <summary>
         /// Prints the presentation of where the box if located. [0] = level, [1] = rack number, [2] = rack slot.
@@ -211,7 +211,7 @@ namespace StorageFacility
                     Console.WriteLine("Level: {0} Rack: {1}", i + 1, j);
                     foreach (I3DObject boxes in storageFacility[i, j])
                     {
-                        Console.WriteLine("Id: " + boxes.Id.ToString() + "Description" + boxes.Description + "\n---");
+                        Console.WriteLine("Id: " + boxes.Id.ToString() + " Description " + boxes.Description + "\n---");
                     }
                     if (j % 5 == 0)
                     {
