@@ -73,7 +73,7 @@ namespace BackEnd
                     }
                 }
             }
-
+            highestCurrentId++;
             return highestCurrentId;
         }
 
@@ -171,7 +171,7 @@ namespace BackEnd
         /// </summary>
         /// <param name="newBox">The object that contains the new box</param>
         /// <param name="level">The index position of the level that intended rack is on</param>
-        /// <param name="rack">The index position of the intended rack</param>
+        /// <param name="rack">The index position of the intended rack not zero based</param>
         /// <returns>Gives a bool that tells if the addition to specified rack was sucessfull or not.</returns>
         internal bool TryAddBoxToSpecifiedRack(I3DObject newBox, int level, int rack)
         {

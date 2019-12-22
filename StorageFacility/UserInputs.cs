@@ -190,7 +190,7 @@ namespace StorageFacility
                 {
                     Console.WriteLine("Please do only write numbers");
                 }
-                else if (userChoice < 1 || userChoice > 7)
+                else if (userChoice < 1 || userChoice > 8)
                 {
                     Console.WriteLine("Please enter a valid menu choice");
                     sucessfullConversion = false;

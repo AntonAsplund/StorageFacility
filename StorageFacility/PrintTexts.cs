@@ -27,6 +27,8 @@ namespace StorageFacility
             Console.WriteLine("6. Save the information to a database");
             Console.WriteLine("7. Quit the program\n");
 
+            Console.WriteLine("8. Add X number of test cases to the menu\n"); //This is only here for the test phase. To be deleted before final release to customer
+            
             Console.Write("Please choose a menu option: ");
 
         }

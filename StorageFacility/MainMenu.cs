@@ -20,6 +20,7 @@ namespace StorageFacility
             MenuMethods menuMethods = new MenuMethods();
             PrintTexts printTexts = new PrintTexts();
             UserInputs userInputs = new UserInputs();
+            AddTestCases addTestCases = new AddTestCases();
 
             bool stayInMenu = true;
 
@@ -153,7 +154,13 @@ namespace StorageFacility
                             storageFacility.SerializeObject();
                             stayInMenu = false;
                             break;
-
+                        }
+                    case 8:
+                        {   //Adds a number of test cases to the program
+                            addTestCases.AddTestBoxes(storageFacility);
+                            storageFacility.SerializeObject();
+                            menuMethods.ContinueToMainMenu();
+                            break;
                         }
                 }
             }
